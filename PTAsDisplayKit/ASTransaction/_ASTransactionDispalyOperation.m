@@ -22,11 +22,10 @@
 
 - (id)initWithOperationDispalyBlock:(asyncdisplaykit_async_transaction_operation_block_t)displayBlock andCompletionBlock:(asyncdisplaykit_async_transaction_operation_completion_block_t)displayCompletionBlock
 {
-    self = [super init];
+    self = [self init];
     if (self){
         _displayBlock = [displayBlock copy];
         _displayCompletionBlock = [displayCompletionBlock copy];
-        _value = nil;
     }
     return self;
 }

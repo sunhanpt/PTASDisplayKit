@@ -9,9 +9,9 @@
 #ifndef ASTransactionConfig_h
 #define ASTransactionConfig_h
 
-@class _ASAsyncTransaction;
+@class _ASTransaction;
 
-typedef void(^asyncdisplaykit_async_transaction_completion_block_t)(_ASAsyncTransaction *completedTransaction, BOOL canceled);
+typedef void(^asyncdisplaykit_async_transaction_completion_block_t)(_ASTransaction *completedTransaction, BOOL canceled);
 typedef id<NSObject>(^asyncdisplaykit_async_transaction_operation_block_t)(void);
 typedef void(^asyncdisplaykit_async_transaction_operation_completion_block_t)(id<NSObject> value, BOOL canceled);
 typedef void(^asyncdisplaykit_async_transaction_complete_async_operation_block_t)(id<NSObject> value);

@@ -23,6 +23,7 @@
  */
 @property (nonatomic, readonly, copy) asyncdisplaykit_async_transaction_operation_completion_block_t displayCompletionBlock;
 - (id)initWithOperationDispalyBlock:(asyncdisplaykit_async_transaction_operation_block_t)displayBlock andCompletionBlock:(asyncdisplaykit_async_transaction_operation_completion_block_t)displayCompletionBlock;
+- (void)callAndReleaseCompletionBlock:(BOOL)canceled;
 
 @end
 

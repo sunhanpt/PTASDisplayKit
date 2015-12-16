@@ -9,9 +9,9 @@
 #ifndef _ASTransaction_h
 #define _ASTransaction_h
 #import <Foundation/Foundation.h>
-#import "_ASTransactionDispalyOperation.h"
+#import "_ASAsyncTransactionDispalyOperation.h"
 
-@interface _ASTransaction : NSObject
+@interface _ASAsyncTransaction : NSObject
 /**
  *  completionBlock运行的线程queue
  */

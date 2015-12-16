@@ -6,7 +6,7 @@
 //  Copyright © 2015年 sunhanpt-pc. All rights reserved.
 //
 
-#import "_ASTransaction.h"
+#import "_ASAsyncTransaction.h"
 #import "ASAssert.h"
 
 @interface _ASTransactionDispalyQueue : NSOperationQueue
@@ -28,7 +28,7 @@
 
 @end
 
-@implementation _ASTransaction
+@implementation _ASAsyncTransaction
 {
     dispatch_group_t _group;
     NSMutableArray * _operations;
@@ -63,7 +63,7 @@
         dispatch_group_leave(_group);
         return block();
     };
-    _ASTransactionDispalyOperation * operation = [[_ASTransactionDispalyOperation alloc] initWithOperationDispalyBlock:displayBlock andCompletionBlock:completion];
+    _ASAsyncTransactionDispalyOperation * operation = [[_ASAsyncTransactionDispalyOperation alloc] initWithOperationDispalyBlock:displayBlock andCompletionBlock:completion];
     [_operations addObject:operation];
     dispatch_group_enter(_group);
     [[_ASTransactionDispalyQueue sharedInstance] addOperation:operation];
@@ -101,7 +101,7 @@
 {
     if (_state != ASAsyncTransactionStateComplete) {
         BOOL isCanceled = (_state == ASAsyncTransactionStateCanceled);
-        for (_ASTransactionDispalyOperation * operation in _operations) {
+        for (_ASAsyncTransactionDispalyOperation * operation in _operations) {
             [operation callAndReleaseCompletionBlock:isCanceled];
         }
         _state = ASAsyncTransactionStateComplete;

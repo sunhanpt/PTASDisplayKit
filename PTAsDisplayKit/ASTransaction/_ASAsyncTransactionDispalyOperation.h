@@ -11,9 +11,9 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import "_ASTransactionConfig.h"
+#import "_ASAsyncTransactionConfig.h"
 
-@interface _ASTransactionDispalyOperation : NSOperation
+@interface _ASAsyncTransactionDispalyOperation : NSOperation
 /**
  *  绘制block
  */

@@ -11,9 +11,9 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import "_ASTransactionConfig.h"
+#import "_ASAsyncTransactionConfig.h"
 
-@interface _ASTransactionDispalyOperation : NSOperation
+@interface _ASAsyncTransactionDispalyOperation : NSOperation
 /**
  *  绘制block
  */
@@ -23,6 +23,7 @@
  */
 @property (nonatomic, readonly, copy) asyncdisplaykit_async_transaction_operation_completion_block_t displayCompletionBlock;
 - (id)initWithOperationDispalyBlock:(asyncdisplaykit_async_transaction_operation_block_t)displayBlock andCompletionBlock:(asyncdisplaykit_async_transaction_operation_completion_block_t)displayCompletionBlock;
+- (void)callAndReleaseCompletionBlock:(BOOL)canceled;
 
 @end
 

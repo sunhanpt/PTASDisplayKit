@@ -7,10 +7,10 @@
 //
 
 
-#import "_ASTransactionDispalyOperation.h"
+#import "_ASAsyncTransactionDispalyOperation.h"
 #import "ASAssert.h"
 
-@interface  _ASTransactionDispalyOperation()
+@interface  _ASAsyncTransactionDispalyOperation()
 /**
  *  绘制返回的结果值
  */
@@ -18,15 +18,14 @@
 
 @end
 
-@implementation _ASTransactionDispalyOperation
+@implementation _ASAsyncTransactionDispalyOperation
 
 - (id)initWithOperationDispalyBlock:(asyncdisplaykit_async_transaction_operation_block_t)displayBlock andCompletionBlock:(asyncdisplaykit_async_transaction_operation_completion_block_t)displayCompletionBlock
 {
-    self = [super init];
+    self = [self init];
     if (self){
         _displayBlock = [displayBlock copy];
         _displayCompletionBlock = [displayCompletionBlock copy];
-        _value = nil;
     }
     return self;
 }

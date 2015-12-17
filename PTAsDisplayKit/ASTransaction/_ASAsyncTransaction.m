@@ -6,8 +6,12 @@
 //  Copyright © 2015年 sunhanpt-pc. All rights reserved.
 //
 
-#import "_ASAsyncTransaction.h"
 #import "ASAssert.h"
+#import "_ASAsyncTransaction.h"
+#import "_ASAsyncTransactionGroup.h"
+
+// 最大并行数
+static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
 
 @interface _ASTransactionDispalyQueue : NSOperationQueue
 + (id)sharedInstance;
@@ -21,6 +25,7 @@
     dispatch_once(&lock, ^(void){
         if (!_displayQueue){
             _displayQueue = [[_ASTransactionDispalyQueue alloc] init];
+            [_displayQueue setMaxConcurrentOperationCount:__ASDisplayLayerMaxConcurrentDisplayCount];
         }
     });
     return _displayQueue;
@@ -35,7 +40,7 @@
 }
 
 #pragma mark - lifecycle
-- (id)initWithCallBackQueue:(dispatch_queue_t)callBackQueue completionBlock:(asyncdisplaykit_async_transaction_completion_block_t)completionBlock
+- (id)initWithCallbackQueue:(dispatch_queue_t)callBackQueue completionBlock:(asyncdisplaykit_async_transaction_completion_block_t)completionBlock
 {
     self = [self init];
     if (self){
@@ -67,6 +72,11 @@
     [_operations addObject:operation];
     dispatch_group_enter(_group);
     [[_ASTransactionDispalyQueue sharedInstance] addOperation:operation];
+}
+
+- (void)addOperation:(_ASAsyncTransactionDispalyOperation *)operation
+{
+    
 }
 
 - (void)cancel
@@ -125,8 +135,7 @@
             dispatch_group_wait(_group, DISPATCH_TIME_FOREVER);
             
             if (_state == ASAsyncTransactionStateOpen) {
-                //TODO:transactionGroup的提交
-                //[_ASAsyncTransactionGroup commit];
+                [_ASAsyncTransactionGroup commit];
                 ASDisplayNodeAssert(_state != ASAsyncTransactionStateOpen, @"Transaction should not be open after committing group");
             }
             [self completeTransaction];

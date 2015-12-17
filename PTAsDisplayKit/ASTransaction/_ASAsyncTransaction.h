@@ -32,7 +32,7 @@
  *
  *  @return 返回ASTransaction
  */
-- (id)initWithCallBackQueue:(dispatch_queue_t)callBackQueue
+- (id)initWithCallbackQueue:(dispatch_queue_t)callBackQueue
             completionBlock:(asyncdisplaykit_async_transaction_completion_block_t)completionBlock;
 /**
  *  添加一个operation到transaction并立即运行在并行线程中
@@ -42,6 +42,12 @@
  */
 - (void)addOperationWithBlock:(asyncdisplaykit_async_transaction_operation_block_t)block
                    completion:(asyncdisplaykit_async_transaction_operation_completion_block_t)completion;
+/**
+ *  添加操作operation
+ *
+ *  @param operation 传入的operation
+ */
+- (void)addOperation:(_ASAsyncTransactionDispalyOperation *)operation;
 
 /**
  *  取消transaction的操作

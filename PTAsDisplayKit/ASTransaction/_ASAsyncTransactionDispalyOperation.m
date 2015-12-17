@@ -6,9 +6,46 @@
 //  Copyright © 2015年 sunhanpt-pc. All rights reserved.
 //
 
-
-#import "_ASAsyncTransactionDispalyOperation.h"
+#import <pthread.h>
+#import <mach/mach.h>
 #import "ASAssert.h"
+#import "_ASAsyncTransactionDispalyOperation.h"
+
+#if DEBUG
+static inline void currentThreadInfo(NSString* str)
+{
+    if (str){
+        NSLog(@"---------%@----------",str);
+    }
+    
+    NSThread* thread = [NSThread currentThread];
+    mach_port_t machTID = pthread_mach_thread_np(pthread_self());
+    NSLog(@"current thread num: %x thread name:%@", machTID,thread.name);
+    
+    if (str){
+        NSLog(@"-------------------");
+    }
+}
+
+
+static inline void dumpThreads(NSString* str) {
+    
+    NSLog(@"---------%@----------",str);
+    currentThreadInfo(nil);
+    char name[256];
+    thread_act_array_t threads = NULL;
+    mach_msg_type_number_t thread_count = 0;
+    task_threads(mach_task_self(), &threads, &thread_count);
+    for (mach_msg_type_number_t i = 0; i < thread_count; i++) {
+        thread_t thread = threads[i];
+        pthread_t pthread = pthread_from_mach_thread_np(thread);
+        pthread_getname_np(pthread, name, sizeof name);
+        NSLog(@"mach thread %x: getname: %s", pthread_mach_thread_np(pthread), name);
+    }
+    NSLog(@"-------------------");
+}
+#endif
+
 
 @interface  _ASAsyncTransactionDispalyOperation()
 /**
@@ -44,6 +81,9 @@
 - (void)dealloc
 {
     ASDisplayNodeAssertNil(_displayCompletionBlock, @"Should have been called and released before -dealloc");
+#if DEBUG
+    dumpThreads(@"dealloc");
+#endif
 }
 
 - (BOOL)isConcurrent
@@ -57,7 +97,22 @@
     if (self.isCancelled){
         return;
     }
-    self.value = _displayBlock();
+#if DEBUG
+    currentThreadInfo(@"start");
+#endif
+    if (_displayBlock){
+        self.value = _displayBlock();
+    }
+}
+
+/**
+ *  在NSOperationQueue中，取消一个operation并不会将其从队列中移除。只有当operation处于完成状态，queue才会将它移除。
+ *  因此重写cancel，将状态值置为“完成”，之后queue会将其移除。
+ */
+- (void)cancel
+{
+    [super cancel];
+    [self setValue:@(YES) forKey:@"isFinished"];
 }
 - (void)callAndReleaseCompletionBlock:(BOOL)canceled
 {
@@ -71,5 +126,7 @@
 {
     return [NSString stringWithFormat:@"<ASDisplayNodeAsyncTransactionOperation: %p - value = %@", self, self.value];
 }
+
+
 
 @end

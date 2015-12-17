@@ -10,6 +10,7 @@
 		6611053F1C1EBDF7006AA729 /* _ASAsyncTransactionDispalyOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6611053E1C1EBDF7006AA729 /* _ASAsyncTransactionDispalyOperation.m */; };
 		664504171C1FB1FB008E1843 /* _ASAsyncTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 664504161C1FB1FB008E1843 /* _ASAsyncTransaction.m */; };
 		6645041A1C203460008E1843 /* _ASAsyncTransactionContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 664504191C203460008E1843 /* _ASAsyncTransactionContainer.m */; };
+		6656D9C81C214C4900819E48 /* _ASAsyncTransactionGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6656D9C71C214C4900819E48 /* _ASAsyncTransactionGroup.m */; };
 		66DEECB11C1AAF7000CE6D7E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DEECB01C1AAF7000CE6D7E /* main.m */; };
 		66DEECB41C1AAF7000CE6D7E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DEECB31C1AAF7000CE6D7E /* AppDelegate.m */; };
 		66DEECB71C1AAF7000CE6D7E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DEECB61C1AAF7000CE6D7E /* ViewController.m */; };
@@ -45,6 +46,8 @@
 		664504161C1FB1FB008E1843 /* _ASAsyncTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ASAsyncTransaction.m; sourceTree = "<group>"; };
 		664504181C203324008E1843 /* _ASAsyncTransactionContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _ASAsyncTransactionContainer.h; sourceTree = "<group>"; };
 		664504191C203460008E1843 /* _ASAsyncTransactionContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ASAsyncTransactionContainer.m; sourceTree = "<group>"; };
+		6656D9C61C214C3F00819E48 /* _ASAsyncTransactionGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _ASAsyncTransactionGroup.h; sourceTree = "<group>"; };
+		6656D9C71C214C4900819E48 /* _ASAsyncTransactionGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ASAsyncTransactionGroup.m; sourceTree = "<group>"; };
 		66DEECAC1C1AAF7000CE6D7E /* PTAsDisplayKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PTAsDisplayKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66DEECB01C1AAF7000CE6D7E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		66DEECB21C1AAF7000CE6D7E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -97,6 +100,8 @@
 				664504161C1FB1FB008E1843 /* _ASAsyncTransaction.m */,
 				664504181C203324008E1843 /* _ASAsyncTransactionContainer.h */,
 				664504191C203460008E1843 /* _ASAsyncTransactionContainer.m */,
+				6656D9C61C214C3F00819E48 /* _ASAsyncTransactionGroup.h */,
+				6656D9C71C214C4900819E48 /* _ASAsyncTransactionGroup.m */,
 			);
 			path = ASTransaction;
 			sourceTree = "<group>";
@@ -312,6 +317,7 @@
 				66DEECB71C1AAF7000CE6D7E /* ViewController.m in Sources */,
 				6645041A1C203460008E1843 /* _ASAsyncTransactionContainer.m in Sources */,
 				66DEECB41C1AAF7000CE6D7E /* AppDelegate.m in Sources */,
+				6656D9C81C214C4900819E48 /* _ASAsyncTransactionGroup.m in Sources */,
 				664504171C1FB1FB008E1843 /* _ASAsyncTransaction.m in Sources */,
 				66DEECB11C1AAF7000CE6D7E /* main.m in Sources */,
 				6611053F1C1EBDF7006AA729 /* _ASAsyncTransactionDispalyOperation.m in Sources */,

@@ -9,7 +9,7 @@
 #import <pthread.h>
 #import <mach/mach.h>
 #import "ASAssert.h"
-#import "_ASAsyncTransactionDispalyOperation.h"
+#import "_ASAsyncDispalyOperation.h"
 
 #if DEBUG
 static inline void currentThreadInfo(NSString* str)
@@ -47,7 +47,7 @@ static inline void dumpThreads(NSString* str) {
 #endif
 
 
-@interface  _ASAsyncTransactionDispalyOperation()
+@interface  _ASAsyncDispalyOperation()
 /**
  *  绘制返回的结果值
  */
@@ -55,9 +55,9 @@ static inline void dumpThreads(NSString* str) {
 
 @end
 
-@implementation _ASAsyncTransactionDispalyOperation
+@implementation _ASAsyncDispalyOperation
 
-- (id)initWithOperationDispalyBlock:(asyncdisplaykit_async_transaction_operation_block_t)displayBlock andCompletionBlock:(asyncdisplaykit_async_transaction_operation_completion_block_t)displayCompletionBlock
+- (id)initWithOperationDispalyBlock:(async_operation_display_block_t)displayBlock andCompletionBlock:(async_operation_completion_block_t)displayCompletionBlock
 {
     self = [self init];
     if (self){

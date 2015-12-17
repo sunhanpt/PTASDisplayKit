@@ -7,7 +7,7 @@
 //
 
 #import "ASAssert.h"
-#import "_ASAsyncTransaction.h"
+#import "_ASDisplayLayer.h"
 #import "_ASAsyncTransactionGroup.h"
 
 // 最大并行数
@@ -33,14 +33,14 @@ static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
 
 @end
 
-@implementation _ASAsyncTransaction
+@implementation _ASDisplayLayer
 {
     dispatch_group_t _group;
     NSMutableArray * _operations;
 }
 
 #pragma mark - lifecycle
-- (id)initWithCallbackQueue:(dispatch_queue_t)callBackQueue completionBlock:(asyncdisplaykit_async_transaction_completion_block_t)completionBlock
+- (id)initWithCallbackQueue:(dispatch_queue_t)callBackQueue completionBlock:(async_layer_completion_block_t)completionBlock
 {
     self = [self init];
     if (self){
@@ -52,45 +52,67 @@ static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
     }
     return self;
 }
+
+- (id)init
+{
+    self = [super init];
+    if (self){
+        _callbackQueue = dispatch_get_main_queue();
+        _completionBlcok = NULL;
+        _state = ASAsyncDisplayLayerStateOpen;
+    }
+    return self;
+}
 - (void)dealloc
 {
-    ASDisplayNodeAssert(_state != ASAsyncTransactionStateOpen, @"Uncommitted ASAsyncTransactions are not allowed");
+    ASDisplayNodeAssert(_state != ASAsyncDisplayLayerStateOpen, @"Uncommitted ASAsyncTransactions are not allowed");
 }
-
+#pragma mark - override method
+- (void)display
+{
+    [self _performBlockWithAsyncDelegate:^(id<_ASDisplayLayerDelegate> asyncDelegate) {
+        [asyncDelegate displayAsyncLayer:self asynchronously:YES];
+    }];
+}
 #pragma mark - ASTransaction Manager
-- (void)addOperationWithBlock:(asyncdisplaykit_async_transaction_operation_block_t)block completion:(asyncdisplaykit_async_transaction_operation_completion_block_t)completion
+- (void)addOperationWithBlock:(async_operation_display_block_t)block completion:(async_operation_completion_block_t)completion
 {
     ASDisplayNodeAssertMainThread();
-    ASDisplayNodeAssert(_state == ASAsyncTransactionStateOpen, @"You can only add operations to open transactions");
+    ASDisplayNodeAssert(_state == ASAsyncDisplayLayerStateOpen, @"You can only add operations to open transactions");
     [self _ensureTransactionData];
     // 添加dispatch_group为了线程同步。
-    asyncdisplaykit_async_transaction_operation_block_t displayBlock = (id)^{
+    async_operation_display_block_t displayBlock = (id)^{
+        id<NSObject> value = nil;
+        if (block){
+           value = block();
+        }
         dispatch_group_leave(_group);
-        return block();
+        return value;
     };
-    _ASAsyncTransactionDispalyOperation * operation = [[_ASAsyncTransactionDispalyOperation alloc] initWithOperationDispalyBlock:displayBlock andCompletionBlock:completion];
+    _ASAsyncDispalyOperation * operation = [[_ASAsyncDispalyOperation alloc] initWithOperationDispalyBlock:displayBlock andCompletionBlock:completion];
     [_operations addObject:operation];
     dispatch_group_enter(_group);
     [[_ASTransactionDispalyQueue sharedInstance] addOperation:operation];
+    [[_ASAsyncTransactionGroup mainTransactionGroup] addTransactionLayer:self];
 }
 
-- (void)addOperation:(_ASAsyncTransactionDispalyOperation *)operation
+- (void)addOperation:(_ASAsyncDispalyOperation *)operation
 {
-    
+    [self addOperationWithBlock:[operation.displayBlock copy] completion:[operation.completionBlock copy]];
 }
 
 - (void)cancel
 {
     ASDisplayNodeAssertMainThread();
-    ASDisplayNodeAssert(_state != ASAsyncTransactionStateOpen, @"You can only cancel a committed or already-canceled transaction");
-    _state = ASAsyncTransactionStateCanceled;
+    ASDisplayNodeAssert(_state != ASAsyncDisplayLayerStateOpen, @"You can only cancel a committed or already-canceled transaction");
+    _state = ASAsyncDisplayLayerStateCanceled;
 }
 
 - (void)commit
 {
     ASDisplayNodeAssertMainThread();
-    ASDisplayNodeAssert(_state == ASAsyncTransactionStateOpen, @"You cannot double-commit a transaction");
-    _state = ASAsyncTransactionStateCommitted;
+    ASDisplayNodeAssert(_state == ASAsyncDisplayLayerStateOpen, @"You cannot double-commit a transaction");
+    _state = ASAsyncDisplayLayerStateCommitted;
     if ([_operations count] == 0){
         // transaction已开，但是operation为空，直接同步运行completionBlock
         if (_completionBlcok){
@@ -109,12 +131,12 @@ static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
 
 - (void)completeTransaction
 {
-    if (_state != ASAsyncTransactionStateComplete) {
-        BOOL isCanceled = (_state == ASAsyncTransactionStateCanceled);
-        for (_ASAsyncTransactionDispalyOperation * operation in _operations) {
+    if (_state != ASAsyncDisplayLayerStateComplete) {
+        BOOL isCanceled = (_state == ASAsyncDisplayLayerStateCanceled);
+        for (_ASAsyncDispalyOperation * operation in _operations) {
             [operation callAndReleaseCompletionBlock:isCanceled];
         }
-        _state = ASAsyncTransactionStateComplete;
+        _state = ASAsyncDisplayLayerStateComplete;
         
         if (_completionBlcok) {
             _completionBlcok(self, isCanceled);
@@ -129,14 +151,14 @@ static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
 - (void)waitUntilComplete
 {
     ASDisplayNodeAssertMainThread();
-    if (_state != ASAsyncTransactionStateComplete) {
+    if (_state != ASAsyncDisplayLayerStateComplete) {
         if (_group) {
             ASDisplayNodeAssertTrue(_callbackQueue == dispatch_get_main_queue());
             dispatch_group_wait(_group, DISPATCH_TIME_FOREVER);
             
-            if (_state == ASAsyncTransactionStateOpen) {
+            if (_state == ASAsyncDisplayLayerStateOpen) {
                 [_ASAsyncTransactionGroup commit];
-                ASDisplayNodeAssert(_state != ASAsyncTransactionStateOpen, @"Transaction should not be open after committing group");
+                ASDisplayNodeAssert(_state != ASAsyncDisplayLayerStateOpen, @"Layer should not be open after committing group");
             }
             [self completeTransaction];
         }
@@ -154,6 +176,18 @@ static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
         _operations = [[NSMutableArray alloc] init];
     }
 }
+
+- (void)_performBlockWithAsyncDelegate:(void(^)(id<_ASDisplayLayerDelegate> asyncDelegate))block
+{
+    id<_ASDisplayLayerDelegate> __attribute__((objc_precise_lifetime)) strongAsyncDelegate;
+    {
+        // TODO:加锁
+        //ASDN::MutexLocker l(_asyncDelegateLock);
+        strongAsyncDelegate = _asyncDelegate;
+    }
+    block(strongAsyncDelegate);
+}
+
 
 - (NSString *)description
 {

@@ -12,7 +12,7 @@
 #import <UIKit/UIKit.h>
 
 
-@class _ASAsyncTransaction;
+@class _ASDisplayLayer;
 
 /// A group of transaction container layers, for which the current transactions are committed together at the end of the next runloop tick.
 @interface _ASAsyncTransactionGroup : NSObject
@@ -23,7 +23,7 @@
 /// Add a transaction container to be committed.
 /// @param containerLayer A layer containing a transaction to be commited. May or may not be a container layer.
 /// @see ASAsyncTransactionContainer
-- (void)addTransactionContainer:(CALayer *)containerLayer;
+- (void)addTransactionLayer:(CALayer *)containerLayer;
 @end
 
 

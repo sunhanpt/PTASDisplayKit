@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "_ASAsyncTransaction.h"
+#import "_ASDisplayLayer.h"
 
 @interface ASOperation : NSOperation
 
@@ -30,14 +30,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // test
-    _ASAsyncTransaction * transaction = [[_ASAsyncTransaction alloc] initWithCallbackQueue:nil completionBlock:^(_ASAsyncTransaction *completedTransaction, BOOL canceled) {
-    }];
-    for (int i = 0; i < 20; i++){
-        _ASAsyncTransactionDispalyOperation * operation = [[_ASAsyncTransactionDispalyOperation alloc] initWithOperationDispalyBlock:^id<NSObject>{return nil;} andCompletionBlock:^(id<NSObject> value, BOOL canceled) {
-            transaction addOperationWithBlock:<#^id<NSObject>(void)block#> completion:<#^(id<NSObject> value, BOOL canceled)completion#>
-        }];
-    }
+//    // test
+//    _ASAsyncTransaction * transaction = [[_ASAsyncTransaction alloc] initWithCallbackQueue:nil completionBlock:^(_ASAsyncTransaction *completedTransaction, BOOL canceled) {
+//    }];
+//    for (int i = 0; i < 20; i++){
+//        _ASAsyncDispalyOperation * operation = [[_ASAsyncDispalyOperation alloc] initWithOperationDispalyBlock:^id<NSObject>{return nil;} andCompletionBlock:^(id<NSObject> value, BOOL canceled) {
+//            transaction addOperationWithBlock:<#^id<NSObject>(void)block#> completion:<#^(id<NSObject> value, BOOL canceled)completion#>
+//        }];
+//    }
 }
 
 - (void)didReceiveMemoryWarning {

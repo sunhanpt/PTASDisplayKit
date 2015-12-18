@@ -54,7 +54,10 @@
  *  @param operation 传入的operation
  */
 - (void)addOperation:(_ASAsyncDispalyOperation *)operation;
-
+/**
+ *  释放掉所有绘制数据（在layer绘制结束之后执行）
+ */
+- (void)releaseAllOperations;
 /**
  *  取消transaction的操作
  */

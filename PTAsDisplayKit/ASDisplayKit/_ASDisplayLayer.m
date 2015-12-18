@@ -70,9 +70,15 @@ static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
 #pragma mark - override method
 - (void)display
 {
+    self.contents = super.contents;
     [self _performBlockWithAsyncDelegate:^(id<_ASDisplayLayerDelegate> asyncDelegate) {
         [asyncDelegate displayAsyncLayer:self asynchronously:YES];
     }];
+}
+
+- (void)layoutSublayers
+{
+    [super layoutSublayers];
 }
 #pragma mark - ASTransaction Manager
 - (void)addOperationWithBlock:(async_operation_display_block_t)block completion:(async_operation_completion_block_t)completion
@@ -99,6 +105,13 @@ static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
 - (void)addOperation:(_ASAsyncDispalyOperation *)operation
 {
     [self addOperationWithBlock:[operation.displayBlock copy] completion:[operation.completionBlock copy]];
+}
+
+- (void)releaseAllOperations
+{
+    if (_operations){
+        [_operations removeAllObjects];
+    }
 }
 
 - (void)cancel

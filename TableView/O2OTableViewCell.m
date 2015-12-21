@@ -9,21 +9,27 @@
 #import "O2OTableViewCell.h"
 #import "ASLabelNode.h"
 
+@interface  O2OTableViewCell()
+
+@property (nonatomic, strong) ASLabelNode * labelNode;
+
+@end
+
 @implementation O2OTableViewCell
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self){
-        ASLabelNode * labelNode = [[ASLabelNode alloc] init];
-        [self.contentView.layer addSublayer:labelNode.layer];
+        _labelNode = [[ASLabelNode alloc] init];
+        [self.contentView.layer addSublayer:_labelNode.layer];
     }
     return self;
 }
 
 - (void)layoutSubviews
 {
-    [super layoutSubviews];
-    [self.contentView.layer layoutSublayers];
+    [_labelNode.layer setFrame:CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height)];
+    [_labelNode.layer setBackgroundColor:[UIColor colorWithRed:0.65 green:0.65 blue:0.65 alpha:1.0].CGColor];
 }
 
 @end

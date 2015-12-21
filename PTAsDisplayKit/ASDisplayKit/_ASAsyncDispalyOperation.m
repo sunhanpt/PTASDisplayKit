@@ -32,16 +32,16 @@ static inline void dumpThreads(NSString* str) {
     
     NSLog(@"---------%@----------",str);
     currentThreadInfo(nil);
-    char name[256];
-    thread_act_array_t threads = NULL;
-    mach_msg_type_number_t thread_count = 0;
-    task_threads(mach_task_self(), &threads, &thread_count);
-    for (mach_msg_type_number_t i = 0; i < thread_count; i++) {
-        thread_t thread = threads[i];
-        pthread_t pthread = pthread_from_mach_thread_np(thread);
-        pthread_getname_np(pthread, name, sizeof name);
-        NSLog(@"mach thread %x: getname: %s", pthread_mach_thread_np(pthread), name);
-    }
+//    char name[256];
+//    thread_act_array_t threads = NULL;
+//    mach_msg_type_number_t thread_count = 0;
+//    task_threads(mach_task_self(), &threads, &thread_count);
+//    for (mach_msg_type_number_t i = 0; i < thread_count; i++) {
+//        thread_t thread = threads[i];
+//        pthread_t pthread = pthread_from_mach_thread_np(thread);
+//        pthread_getname_np(pthread, name, sizeof name);
+//        NSLog(@"mach thread %x: getname: %s", pthread_mach_thread_np(pthread), name);
+//    }
     NSLog(@"-------------------");
 }
 #endif
@@ -117,6 +117,7 @@ static inline void dumpThreads(NSString* str) {
 - (void)callAndReleaseCompletionBlock:(BOOL)canceled
 {
     if (_displayCompletionBlock){
+        ASDisplayNodeAssertMainThread();
         _displayCompletionBlock(self.value, canceled);
         _displayCompletionBlock = nil;
     }

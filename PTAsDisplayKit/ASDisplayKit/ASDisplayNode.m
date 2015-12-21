@@ -50,6 +50,7 @@
 // test
 - (void)displayAsyncLayer:(_ASDisplayLayer *)asyncLayer asynchronously:(BOOL)asynchronously
 {
+    
     async_operation_display_block_t displayBlock = ^id{
         return [self.class displayWithParameters:nil isCancelled:nil];
     };

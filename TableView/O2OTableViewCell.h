@@ -13,6 +13,8 @@
 
 @interface  O2OTableViewCell: UITableViewCell
 
+@property (nonatomic, strong) NSString * name;
+
 @end
 
 #endif /* O2OTableViewCell_h */

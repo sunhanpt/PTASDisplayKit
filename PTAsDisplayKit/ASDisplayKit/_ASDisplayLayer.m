@@ -21,7 +21,7 @@ static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
 + (id)sharedInstance
 {
     static _ASTransactionDispalyQueue * _displayQueue = nil;
-    dispatch_once_t lock;
+    static dispatch_once_t lock;
     dispatch_once(&lock, ^(void){
         if (!_displayQueue){
             _displayQueue = [[_ASTransactionDispalyQueue alloc] init];
@@ -68,9 +68,14 @@ static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
     ASDisplayNodeAssert(_state != ASAsyncDisplayLayerStateOpen, @"Uncommitted ASAsyncTransactions are not allowed");
 }
 #pragma mark - override method
+- (void)setContents:(id)contents
+{
+    ASDisplayNodeAssertMainThread();
+    [super setContents:contents];
+}
 - (void)display
 {
-    self.contents = super.contents;
+    super.contents = super.contents;
     [self _performBlockWithAsyncDelegate:^(id<_ASDisplayLayerDelegate> asyncDelegate) {
         [asyncDelegate displayAsyncLayer:self asynchronously:YES];
     }];
@@ -79,6 +84,7 @@ static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
 - (void)layoutSublayers
 {
     [super layoutSublayers];
+    [self setNeedsDisplay];
 }
 #pragma mark - ASTransaction Manager
 - (void)addOperationWithBlock:(async_operation_display_block_t)block completion:(async_operation_completion_block_t)completion

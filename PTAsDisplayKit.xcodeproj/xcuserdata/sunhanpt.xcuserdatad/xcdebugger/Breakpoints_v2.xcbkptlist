@@ -22,16 +22,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PTAsDisplayKit/ASDisplayKit/ASLabelNode.m"
-            timestampString = "472449760.899175"
+            filePath = "PTAsDisplayKit/ASDisplayKit/_ASDisplayLayer.m"
+            timestampString = "472467489.253768"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
-            landmarkName = "+displayWithParameters:isCancelled:"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "-display"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

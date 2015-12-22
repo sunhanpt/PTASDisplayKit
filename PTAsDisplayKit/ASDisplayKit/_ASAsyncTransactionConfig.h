@@ -36,7 +36,7 @@ typedef void(^async_operation_completion_block_t)(id<NSObject> value, BOOL cance
  *
  *  @return 返回BOOL值
  */
-typedef BOOL(^asdisplaynode_iscancelled_block_t)(void);
+typedef BOOL(^async_operation_iscancelled_block_t)(void);
 /**
  *  transaction的状态
  */

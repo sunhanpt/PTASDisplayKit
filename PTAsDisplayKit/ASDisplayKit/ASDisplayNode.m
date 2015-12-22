@@ -43,10 +43,12 @@
 }
 
 #pragma mark - _ASDisplayLayerDelegate
-- (async_operation_display_block_t)displayAsyncLayer:(_ASDisplayLayer *)asyncLayer asynchronously:(BOOL)asynchronously
+- (async_operation_display_block_t)displayAsyncLayer:(_ASDisplayLayer *)asyncLayer isCancelledBlock:(async_operation_iscancelled_block_t)isCacelledBlock asynchronously:(BOOL)asynchronously
 {
-    
     async_operation_display_block_t displayBlock = ^id{
+        if (isCacelledBlock && isCacelledBlock()){
+            return nil;
+        }
         return [self.class displayWithParameters:nil isCancelled:nil];
     };
     return [displayBlock copy];

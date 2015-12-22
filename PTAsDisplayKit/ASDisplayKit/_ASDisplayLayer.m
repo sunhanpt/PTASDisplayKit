@@ -7,6 +7,7 @@
 //
 
 #import "ASAssert.h"
+#import "ASSentinel.h"
 #import "_ASDisplayLayer.h"
 #import "_ASAsyncTransaction.h"
 #import "_ASAsyncTransactionGroup.h"
@@ -18,6 +19,7 @@
  *  事务：包含operations
  */
 @property (nonatomic, strong) _ASAsyncTransaction * asTransaction;
+@property (nonatomic, strong) ASSentinel * displaySentinel;
 
 @end
 
@@ -28,7 +30,9 @@
 {
     self = [super init];
     if (self){
-        
+        self.displaySentinel = [[ASSentinel alloc] init];
+        self.opaque = YES;
+        self.displaysAsynchronously = YES;
     }
     return self;
 }
@@ -52,9 +56,14 @@
 }
 - (void)display
 {
-    super.contents = super.contents;
+    self.contents = super.contents;
     [self _performBlockWithAsyncDelegate:^(id<_ASDisplayLayerDelegate> asyncDelegate) {
-        async_operation_display_block_t displayBlock = [asyncDelegate displayAsyncLayer:self asynchronously:YES];
+        ASSentinel * displaySentinel = self.displaysAsynchronously ? _displaySentinel : nil;
+        int32_t displaySentinelValue = [displaySentinel increment];
+        async_operation_iscancelled_block_t isCancelledBlock = ^{
+            return (BOOL)(displaySentinelValue != displaySentinel.value);
+        };
+        async_operation_display_block_t displayBlock = [asyncDelegate displayAsyncLayer:self  isCancelledBlock:isCancelledBlock asynchronously:YES];
         __weak typeof(self) weakSelf = self;
         [self.asTransaction addOperationWithBlock:[displayBlock copy] completion:^(id<NSObject> value, BOOL canceled) {
             __strong typeof(self) strongSelf = weakSelf;
@@ -66,8 +75,23 @@
 
 - (void)layoutSublayers
 {
+    ASDisplayNodeAssertMainThread();
     [super layoutSublayers];
     [self setNeedsDisplay];
+}
+
+- (void)setNeedsDisplay
+{
+    ASDisplayNodeAssertMainThread();
+    [self cancelAsyncDisplay];
+    
+    [super setNeedsDisplay];
+}
+#pragma mark - private Methodes
+- (void)cancelAsyncDisplay
+{
+    ASDisplayNodeAssertMainThread();
+    [_displaySentinel increment];
 }
 
 #pragma mark - Helper Methods

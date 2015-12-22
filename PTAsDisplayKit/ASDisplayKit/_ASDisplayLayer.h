@@ -43,7 +43,7 @@
  *  @param isCancelledBlock 取消block
  *  @param isRasterizing    是否光栅化
  */
-+ (void)drawRect:(CGRect)bounds withParameters:(id<NSObject>)parameters isCancelled:(asdisplaynode_iscancelled_block_t)isCancelledBlock isRasterizing:(BOOL)isRasterizing;
++ (void)drawRect:(CGRect)bounds withParameters:(id<NSObject>)parameters isCancelled:(async_operation_iscancelled_block_t)isCancelledBlock isRasterizing:(BOOL)isRasterizing;
 /**
  *  根据参数绘制
  *
@@ -52,7 +52,7 @@
  *
  *  @return 返回一张image
  */
-+ (UIImage *)displayWithParameters:(id<NSObject>)parameters isCancelled:(asdisplaynode_iscancelled_block_t)isCancelledBlock;
++ (UIImage *)displayWithParameters:(id<NSObject>)parameters isCancelled:(async_operation_iscancelled_block_t)isCancelledBlock;
 /**
  *  绘制layer
  *
@@ -79,7 +79,7 @@
  *  @param asyncLayer     传入的layer
  *  @param asynchronously 是否异步的标记
  */
-- (async_operation_display_block_t)displayAsyncLayer:(_ASDisplayLayer *)asyncLayer asynchronously:(BOOL)asynchronously;
+- (async_operation_display_block_t)displayAsyncLayer:(_ASDisplayLayer *)asyncLayer isCancelledBlock:(async_operation_iscancelled_block_t)isCacelledBlock asynchronously:(BOOL)asynchronously;
 /**
  *  取消绘制layer
  *

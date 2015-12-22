@@ -11,7 +11,7 @@
 @implementation ASLabelNode
 
 static int indexLine = 0;
-+ (UIImage *)displayWithParameters:(id<NSObject>)parameters isCancelled:(asdisplaynode_iscancelled_block_t)isCancelledBlock
++ (UIImage *)displayWithParameters:(id<NSObject>)parameters isCancelled:(async_operation_iscancelled_block_t)isCancelledBlock
 {
     UILabel * label = [[UILabel alloc] init];
     [label setFrame: CGRectMake(0, 0, 100, 50)];

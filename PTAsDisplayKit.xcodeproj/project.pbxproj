@@ -22,6 +22,7 @@
 		66DEECBF1C1AAF7000CE6D7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66DEECBD1C1AAF7000CE6D7E /* LaunchScreen.storyboard */; };
 		66DEECCA1C1AAF7000CE6D7E /* PTAsDisplayKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DEECC91C1AAF7000CE6D7E /* PTAsDisplayKitTests.m */; };
 		66DEECD51C1AAF7000CE6D7E /* PTAsDisplayKitUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DEECD41C1AAF7000CE6D7E /* PTAsDisplayKitUITests.m */; };
+		66E5F4051C29434400FAC2B1 /* ASSentinel.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E5F4041C29434400FAC2B1 /* ASSentinel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,8 @@
 		66DEECD01C1AAF7000CE6D7E /* PTAsDisplayKitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PTAsDisplayKitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66DEECD41C1AAF7000CE6D7E /* PTAsDisplayKitUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PTAsDisplayKitUITests.m; sourceTree = "<group>"; };
 		66DEECD61C1AAF7000CE6D7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66E5F4031C29431D00FAC2B1 /* ASSentinel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASSentinel.h; sourceTree = "<group>"; };
+		66E5F4041C29434400FAC2B1 /* ASSentinel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASSentinel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +148,8 @@
 			isa = PBXGroup;
 			children = (
 				661105441C1EE57A006AA729 /* ASAssert.h */,
+				66E5F4031C29431D00FAC2B1 /* ASSentinel.h */,
+				66E5F4041C29434400FAC2B1 /* ASSentinel.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -347,6 +352,7 @@
 				66DEECB41C1AAF7000CE6D7E /* AppDelegate.m in Sources */,
 				661012221C23E435000C4F93 /* _ASDisplayLayer.m in Sources */,
 				6610122D1C23E648000C4F93 /* O2OTableViewCell.m in Sources */,
+				66E5F4051C29434400FAC2B1 /* ASSentinel.m in Sources */,
 				66DEECB11C1AAF7000CE6D7E /* main.m in Sources */,
 				661012201C23E435000C4F93 /* _ASAsyncDispalyOperation.m in Sources */,
 				667676831C27F0EA00DB4F01 /* _ASAsyncTransaction.m in Sources */,

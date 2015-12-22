@@ -37,18 +37,12 @@
 #pragma mark - private
 - (void)_initializeInstance
 {
-//    _layer = [[_ASDisplayLayer alloc] initWithCallbackQueue:NULL completionBlock:^(_ASDisplayLayer *completedLayer, BOOL canceled) {
-//        [completedLayer releaseAllOperations];
-//        // TODO: 添加通知等其他操作
-//    }];
     _layer = [[_ASDisplayLayer alloc] init];
     _layer.asyncDelegate = self;
-    // test
     
 }
 
-#pragma mark - private
-// test
+#pragma mark - _ASDisplayLayerDelegate
 - (async_operation_display_block_t)displayAsyncLayer:(_ASDisplayLayer *)asyncLayer asynchronously:(BOOL)asynchronously
 {
     

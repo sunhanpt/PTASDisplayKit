@@ -9,7 +9,7 @@
 #import <pthread.h>
 #import <mach/mach.h>
 #import "ASAssert.h"
-#import "_ASAsyncTransactionDispalyOperation.h"
+#import "_ASAsyncDispalyOperation.h"
 
 #if DEBUG
 static inline void currentThreadInfo(NSString* str)
@@ -32,22 +32,22 @@ static inline void dumpThreads(NSString* str) {
     
     NSLog(@"---------%@----------",str);
     currentThreadInfo(nil);
-    char name[256];
-    thread_act_array_t threads = NULL;
-    mach_msg_type_number_t thread_count = 0;
-    task_threads(mach_task_self(), &threads, &thread_count);
-    for (mach_msg_type_number_t i = 0; i < thread_count; i++) {
-        thread_t thread = threads[i];
-        pthread_t pthread = pthread_from_mach_thread_np(thread);
-        pthread_getname_np(pthread, name, sizeof name);
-        NSLog(@"mach thread %x: getname: %s", pthread_mach_thread_np(pthread), name);
-    }
+//    char name[256];
+//    thread_act_array_t threads = NULL;
+//    mach_msg_type_number_t thread_count = 0;
+//    task_threads(mach_task_self(), &threads, &thread_count);
+//    for (mach_msg_type_number_t i = 0; i < thread_count; i++) {
+//        thread_t thread = threads[i];
+//        pthread_t pthread = pthread_from_mach_thread_np(thread);
+//        pthread_getname_np(pthread, name, sizeof name);
+//        NSLog(@"mach thread %x: getname: %s", pthread_mach_thread_np(pthread), name);
+//    }
     NSLog(@"-------------------");
 }
 #endif
 
 
-@interface  _ASAsyncTransactionDispalyOperation()
+@interface  _ASAsyncDispalyOperation()
 /**
  *  绘制返回的结果值
  */
@@ -55,9 +55,9 @@ static inline void dumpThreads(NSString* str) {
 
 @end
 
-@implementation _ASAsyncTransactionDispalyOperation
+@implementation _ASAsyncDispalyOperation
 
-- (id)initWithOperationDispalyBlock:(asyncdisplaykit_async_transaction_operation_block_t)displayBlock andCompletionBlock:(asyncdisplaykit_async_transaction_operation_completion_block_t)displayCompletionBlock
+- (id)initWithOperationDispalyBlock:(async_operation_display_block_t)displayBlock andCompletionBlock:(async_operation_completion_block_t)displayCompletionBlock
 {
     self = [self init];
     if (self){
@@ -117,6 +117,7 @@ static inline void dumpThreads(NSString* str) {
 - (void)callAndReleaseCompletionBlock:(BOOL)canceled
 {
     if (_displayCompletionBlock){
+        ASDisplayNodeAssertMainThread();
         _displayCompletionBlock(self.value, canceled);
         _displayCompletionBlock = nil;
     }

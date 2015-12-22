@@ -23,7 +23,7 @@
 /// Add a transaction container to be committed.
 /// @param containerLayer A layer containing a transaction to be commited. May or may not be a container layer.
 /// @see ASAsyncTransactionContainer
-- (void)addTransactionContainer:(CALayer *)containerLayer;
+- (void)addTransaction:(_ASAsyncTransaction *)transaction;
 @end
 
 

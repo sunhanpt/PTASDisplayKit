@@ -10,7 +10,6 @@
 
 #import "_ASAsyncTransaction.h"
 #import "_ASAsyncTransactionGroup.h"
-#import "_ASAsyncTransactionContainer.h"
 
 static void _transactionGroupRunLoopObserverCallback(CFRunLoopObserverRef observer, CFRunLoopActivity activity, void *info);
 
@@ -20,7 +19,7 @@ static void _transactionGroupRunLoopObserverCallback(CFRunLoopObserverRef observ
 @end
 
 @implementation _ASAsyncTransactionGroup {
-    NSHashTable *_containerLayers;
+    NSHashTable *_displayTransactions;
 }
 
 + (_ASAsyncTransactionGroup *)mainTransactionGroup
@@ -65,31 +64,27 @@ static void _transactionGroupRunLoopObserverCallback(CFRunLoopObserverRef observ
 - (id)init
 {
     if ((self = [super init])) {
-        _containerLayers = [NSHashTable hashTableWithOptions:NSPointerFunctionsObjectPointerPersonality];
+        _displayTransactions = [NSHashTable hashTableWithOptions:NSPointerFunctionsObjectPointerPersonality];
     }
     return self;
 }
 
-- (void)addTransactionContainer:(CALayer *)containerLayer
+- (void)addTransaction:(_ASAsyncTransaction *)transaction
 {
     ASDisplayNodeAssertMainThread();
-    ASDisplayNodeAssert(containerLayer != nil, @"No container");
-    [_containerLayers addObject:containerLayer];
+    ASDisplayNodeAssert(transaction != nil, @"No transaction");
+    [_displayTransactions addObject:transaction];
 }
 
 - (void)commit
 {
     ASDisplayNodeAssertMainThread();
     
-    if ([_containerLayers count]) {
-        NSHashTable *containerLayersToCommit = [_containerLayers copy];
-        [_containerLayers removeAllObjects];
+    if ([_displayTransactions count]) {
+        NSHashTable *displayTransactionsToCommit = [_displayTransactions copy];
+        [_displayTransactions removeAllObjects];
         
-        for (CALayer *containerLayer in containerLayersToCommit) {
-            // Note that the act of committing a transaction may open a new transaction,
-            // so we must nil out the transaction we're committing first.
-            _ASAsyncTransaction *transaction = containerLayer.asyncdisplaykit_currentAsyncLayerTransaction;
-            containerLayer.asyncdisplaykit_currentAsyncLayerTransaction = nil;
+        for (_ASAsyncTransaction * transaction in displayTransactionsToCommit) {
             [transaction commit];
         }
     }

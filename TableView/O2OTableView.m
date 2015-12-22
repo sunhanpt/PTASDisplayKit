@@ -22,6 +22,7 @@
     if (self){
         self.delegate = self;
         self.dataSource = self;
+        self.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return self;
 }

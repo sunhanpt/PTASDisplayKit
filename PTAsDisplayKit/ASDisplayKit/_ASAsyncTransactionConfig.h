@@ -9,7 +9,7 @@
 #ifndef ASTransactionConfig_h
 #define ASTransactionConfig_h
 
-@class _ASDisplayLayer;
+@class _ASAsyncTransaction;
 
 /**
  *  整个layer完成的block
@@ -17,7 +17,7 @@
  *  @param completedLayer 传入layer
  *  @param canceled       传入是否取消的标记
  */
-typedef void(^async_layer_completion_block_t)(_ASDisplayLayer *completedLayer, BOOL canceled);
+typedef void(^async_layer_completion_block_t)(_ASAsyncTransaction *asTransaction, BOOL canceled);
 /**
  *  operation绘制block
  *
@@ -40,23 +40,23 @@ typedef BOOL(^asdisplaynode_iscancelled_block_t)(void);
 /**
  *  transaction的状态
  */
-typedef NS_ENUM(NSUInteger, ASAsyncDisplayLayerState) {
+typedef NS_ENUM(NSUInteger, ASAsyncTransationState) {
     /**
      *  打开状态
      */
-    ASAsyncDisplayLayerStateOpen = 0,
+    ASAsyncTransationStateOpen = 0,
     /**
      *  已经提交状态
      */
-    ASAsyncDisplayLayerStateCommitted,
+    ASAsyncTransationStateCommitted,
     /**
      *  取消状态
      */
-    ASAsyncDisplayLayerStateCanceled,
+    ASAsyncTransationStateCanceled,
     /**
      *  完成状态
      */
-    ASAsyncDisplayLayerStateComplete
+    ASAsyncTransationStateComplete
 };
 
 #endif /* ASTransactionConfig_h */

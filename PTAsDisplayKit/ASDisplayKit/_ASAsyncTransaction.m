@@ -1,13 +1,14 @@
 //
-//  _ASTransaction.m
+//  _ASAsyncTransaction.m
 //  PTAsDisplayKit
 //
-//  Created by sunhanpt-pc on 15/12/15.
+//  Created by sunhanpt-pc on 15/12/21.
 //  Copyright © 2015年 sunhanpt-pc. All rights reserved.
 //
 
+
 #import "ASAssert.h"
-#import "_ASDisplayLayer.h"
+#import "_ASAsyncTransaction.h"
 #import "_ASAsyncTransactionGroup.h"
 
 // 最大并行数
@@ -33,7 +34,12 @@ static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
 
 @end
 
-@implementation _ASDisplayLayer
+
+@interface _ASAsyncTransaction()
+
+@end
+
+@implementation _ASAsyncTransaction
 {
     dispatch_group_t _group;
     NSMutableArray * _operations;
@@ -59,44 +65,25 @@ static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
     if (self){
         _callbackQueue = dispatch_get_main_queue();
         _completionBlcok = NULL;
-        _state = ASAsyncDisplayLayerStateOpen;
+        _state = ASAsyncTransationStateOpen;
     }
     return self;
 }
 - (void)dealloc
 {
-    ASDisplayNodeAssert(_state != ASAsyncDisplayLayerStateOpen, @"Uncommitted ASAsyncTransactions are not allowed");
-}
-#pragma mark - override method
-- (void)setContents:(id)contents
-{
-    ASDisplayNodeAssertMainThread();
-    [super setContents:contents];
-}
-- (void)display
-{
-    super.contents = super.contents;
-    [self _performBlockWithAsyncDelegate:^(id<_ASDisplayLayerDelegate> asyncDelegate) {
-        [asyncDelegate displayAsyncLayer:self asynchronously:YES];
-    }];
-}
-
-- (void)layoutSublayers
-{
-    [super layoutSublayers];
-    [self setNeedsDisplay];
+    ASDisplayNodeAssert(_state != ASAsyncTransationStateOpen, @"Uncommitted ASAsyncTransactions are not allowed");
 }
 #pragma mark - ASTransaction Manager
 - (void)addOperationWithBlock:(async_operation_display_block_t)block completion:(async_operation_completion_block_t)completion
 {
     ASDisplayNodeAssertMainThread();
-    ASDisplayNodeAssert(_state == ASAsyncDisplayLayerStateOpen, @"You can only add operations to open transactions");
+    ASDisplayNodeAssert(_state == ASAsyncTransationStateOpen, @"You can only add operations to open transactions");
     [self _ensureTransactionData];
     // 添加dispatch_group为了线程同步。
     async_operation_display_block_t displayBlock = (id)^{
         id<NSObject> value = nil;
         if (block){
-           value = block();
+            value = block();
         }
         dispatch_group_leave(_group);
         return value;
@@ -105,7 +92,7 @@ static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
     [_operations addObject:operation];
     dispatch_group_enter(_group);
     [[_ASTransactionDispalyQueue sharedInstance] addOperation:operation];
-    [[_ASAsyncTransactionGroup mainTransactionGroup] addTransactionLayer:self];
+    [[_ASAsyncTransactionGroup mainTransactionGroup] addTransaction:self];
 }
 
 - (void)addOperation:(_ASAsyncDispalyOperation *)operation
@@ -123,15 +110,15 @@ static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
 - (void)cancel
 {
     ASDisplayNodeAssertMainThread();
-    ASDisplayNodeAssert(_state != ASAsyncDisplayLayerStateOpen, @"You can only cancel a committed or already-canceled transaction");
-    _state = ASAsyncDisplayLayerStateCanceled;
+    ASDisplayNodeAssert(_state != ASAsyncTransationStateOpen, @"You can only cancel a committed or already-canceled transaction");
+    _state = ASAsyncTransationStateCanceled;
 }
 
 - (void)commit
 {
     ASDisplayNodeAssertMainThread();
-    ASDisplayNodeAssert(_state == ASAsyncDisplayLayerStateOpen, @"You cannot double-commit a transaction");
-    _state = ASAsyncDisplayLayerStateCommitted;
+    ASDisplayNodeAssert(_state == ASAsyncTransationStateOpen, @"You cannot double-commit a transaction");
+    _state = ASAsyncTransationStateCommitted;
     if ([_operations count] == 0){
         // transaction已开，但是operation为空，直接同步运行completionBlock
         if (_completionBlcok){
@@ -150,12 +137,12 @@ static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
 
 - (void)completeTransaction
 {
-    if (_state != ASAsyncDisplayLayerStateComplete) {
-        BOOL isCanceled = (_state == ASAsyncDisplayLayerStateCanceled);
+    if (_state != ASAsyncTransationStateComplete) {
+        BOOL isCanceled = (_state == ASAsyncTransationStateCanceled);
         for (_ASAsyncDispalyOperation * operation in _operations) {
             [operation callAndReleaseCompletionBlock:isCanceled];
         }
-        _state = ASAsyncDisplayLayerStateComplete;
+        _state = ASAsyncTransationStateComplete;
         
         if (_completionBlcok) {
             _completionBlcok(self, isCanceled);
@@ -170,21 +157,21 @@ static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
 - (void)waitUntilComplete
 {
     ASDisplayNodeAssertMainThread();
-    if (_state != ASAsyncDisplayLayerStateComplete) {
+    if (_state != ASAsyncTransationStateComplete) {
         if (_group) {
             ASDisplayNodeAssertTrue(_callbackQueue == dispatch_get_main_queue());
             dispatch_group_wait(_group, DISPATCH_TIME_FOREVER);
             
-            if (_state == ASAsyncDisplayLayerStateOpen) {
+            if (_state == ASAsyncTransationStateOpen) {
                 [_ASAsyncTransactionGroup commit];
-                ASDisplayNodeAssert(_state != ASAsyncDisplayLayerStateOpen, @"Layer should not be open after committing group");
+                ASDisplayNodeAssert(_state != ASAsyncTransationStateOpen, @"Layer should not be open after committing group");
             }
             [self completeTransaction];
         }
     }
 }
 
-#pragma mark - Helper Methods
+#pragma mark - help methodes
 - (void)_ensureTransactionData
 {
     // 懒加载成员变量
@@ -195,18 +182,6 @@ static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
         _operations = [[NSMutableArray alloc] init];
     }
 }
-
-- (void)_performBlockWithAsyncDelegate:(void(^)(id<_ASDisplayLayerDelegate> asyncDelegate))block
-{
-    id<_ASDisplayLayerDelegate> __attribute__((objc_precise_lifetime)) strongAsyncDelegate;
-    {
-        // TODO:加锁
-        //ASDN::MutexLocker l(_asyncDelegateLock);
-        strongAsyncDelegate = _asyncDelegate;
-    }
-    block(strongAsyncDelegate);
-}
-
 
 - (NSString *)description
 {

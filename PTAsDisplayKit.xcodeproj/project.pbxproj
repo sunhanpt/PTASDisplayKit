@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		661012131C23E401000C4F93 /* O2OTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 661012121C23E401000C4F93 /* O2OTableView.m */; };
-		661012201C23E435000C4F93 /* _ASAsyncDispalyOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 661012161C23E435000C4F93 /* _ASAsyncDispalyOperation.m */; };
-		661012211C23E435000C4F93 /* _ASAsyncTransactionGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 661012191C23E435000C4F93 /* _ASAsyncTransactionGroup.m */; };
 		661012221C23E435000C4F93 /* _ASDisplayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6610121B1C23E435000C4F93 /* _ASDisplayLayer.m */; };
 		661012231C23E435000C4F93 /* ASDisplayNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6610121D1C23E435000C4F93 /* ASDisplayNode.m */; };
 		661012241C23E435000C4F93 /* ASLabelNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6610121F1C23E435000C4F93 /* ASLabelNode.m */; };
 		6610122D1C23E648000C4F93 /* O2OTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6610122C1C23E648000C4F93 /* O2OTableViewCell.m */; };
-		667676831C27F0EA00DB4F01 /* _ASAsyncTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 667676821C27F0EA00DB4F01 /* _ASAsyncTransaction.m */; };
+		662A3AD11C2AC363007AD700 /* _ASAsyncDispalyOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A3ACB1C2AC363007AD700 /* _ASAsyncDispalyOperation.m */; };
+		662A3AD21C2AC363007AD700 /* _ASAsyncTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A3ACD1C2AC363007AD700 /* _ASAsyncTransaction.m */; };
+		662A3AD31C2AC363007AD700 /* _ASAsyncTransactionGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A3AD01C2AC363007AD700 /* _ASAsyncTransactionGroup.m */; };
 		66DEECB11C1AAF7000CE6D7E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DEECB01C1AAF7000CE6D7E /* main.m */; };
 		66DEECB41C1AAF7000CE6D7E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DEECB31C1AAF7000CE6D7E /* AppDelegate.m */; };
 		66DEECB71C1AAF7000CE6D7E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DEECB61C1AAF7000CE6D7E /* ViewController.m */; };
@@ -45,11 +45,6 @@
 /* Begin PBXFileReference section */
 		661012111C23E3F1000C4F93 /* O2OTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = O2OTableView.h; sourceTree = "<group>"; };
 		661012121C23E401000C4F93 /* O2OTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = O2OTableView.m; sourceTree = "<group>"; };
-		661012151C23E435000C4F93 /* _ASAsyncDispalyOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ASAsyncDispalyOperation.h; sourceTree = "<group>"; };
-		661012161C23E435000C4F93 /* _ASAsyncDispalyOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ASAsyncDispalyOperation.m; sourceTree = "<group>"; };
-		661012171C23E435000C4F93 /* _ASAsyncTransactionConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ASAsyncTransactionConfig.h; sourceTree = "<group>"; };
-		661012181C23E435000C4F93 /* _ASAsyncTransactionGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ASAsyncTransactionGroup.h; sourceTree = "<group>"; };
-		661012191C23E435000C4F93 /* _ASAsyncTransactionGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ASAsyncTransactionGroup.m; sourceTree = "<group>"; };
 		6610121A1C23E435000C4F93 /* _ASDisplayLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ASDisplayLayer.h; sourceTree = "<group>"; };
 		6610121B1C23E435000C4F93 /* _ASDisplayLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ASDisplayLayer.m; sourceTree = "<group>"; };
 		6610121C1C23E435000C4F93 /* ASDisplayNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDisplayNode.h; sourceTree = "<group>"; };
@@ -59,8 +54,13 @@
 		6610122B1C23E63E000C4F93 /* O2OTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = O2OTableViewCell.h; sourceTree = "<group>"; };
 		6610122C1C23E648000C4F93 /* O2OTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = O2OTableViewCell.m; sourceTree = "<group>"; };
 		661105441C1EE57A006AA729 /* ASAssert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASAssert.h; sourceTree = "<group>"; };
-		667676811C27F0D300DB4F01 /* _ASAsyncTransaction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _ASAsyncTransaction.h; sourceTree = "<group>"; };
-		667676821C27F0EA00DB4F01 /* _ASAsyncTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ASAsyncTransaction.m; sourceTree = "<group>"; };
+		662A3ACA1C2AC363007AD700 /* _ASAsyncDispalyOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ASAsyncDispalyOperation.h; sourceTree = "<group>"; };
+		662A3ACB1C2AC363007AD700 /* _ASAsyncDispalyOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ASAsyncDispalyOperation.m; sourceTree = "<group>"; };
+		662A3ACC1C2AC363007AD700 /* _ASAsyncTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ASAsyncTransaction.h; sourceTree = "<group>"; };
+		662A3ACD1C2AC363007AD700 /* _ASAsyncTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ASAsyncTransaction.m; sourceTree = "<group>"; };
+		662A3ACE1C2AC363007AD700 /* _ASAsyncTransactionConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ASAsyncTransactionConfig.h; sourceTree = "<group>"; };
+		662A3ACF1C2AC363007AD700 /* _ASAsyncTransactionGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ASAsyncTransactionGroup.h; sourceTree = "<group>"; };
+		662A3AD01C2AC363007AD700 /* _ASAsyncTransactionGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ASAsyncTransactionGroup.m; sourceTree = "<group>"; };
 		66DEECAC1C1AAF7000CE6D7E /* PTAsDisplayKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PTAsDisplayKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66DEECB01C1AAF7000CE6D7E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		66DEECB21C1AAF7000CE6D7E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -119,13 +119,8 @@
 		661012141C23E435000C4F93 /* ASDisplayKit */ = {
 			isa = PBXGroup;
 			children = (
-				661012171C23E435000C4F93 /* _ASAsyncTransactionConfig.h */,
-				661012151C23E435000C4F93 /* _ASAsyncDispalyOperation.h */,
-				661012161C23E435000C4F93 /* _ASAsyncDispalyOperation.m */,
-				667676811C27F0D300DB4F01 /* _ASAsyncTransaction.h */,
-				667676821C27F0EA00DB4F01 /* _ASAsyncTransaction.m */,
-				661012181C23E435000C4F93 /* _ASAsyncTransactionGroup.h */,
-				661012191C23E435000C4F93 /* _ASAsyncTransactionGroup.m */,
+				662A3AD41C2AC38E007AD700 /* Private */,
+				662A3AC91C2AC363007AD700 /* ASTransaction */,
 				6610121A1C23E435000C4F93 /* _ASDisplayLayer.h */,
 				6610121B1C23E435000C4F93 /* _ASDisplayLayer.m */,
 				6610121C1C23E435000C4F93 /* ASDisplayNode.h */,
@@ -152,6 +147,27 @@
 				66E5F4041C29434400FAC2B1 /* ASSentinel.m */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		662A3AC91C2AC363007AD700 /* ASTransaction */ = {
+			isa = PBXGroup;
+			children = (
+				662A3ACA1C2AC363007AD700 /* _ASAsyncDispalyOperation.h */,
+				662A3ACB1C2AC363007AD700 /* _ASAsyncDispalyOperation.m */,
+				662A3ACC1C2AC363007AD700 /* _ASAsyncTransaction.h */,
+				662A3ACD1C2AC363007AD700 /* _ASAsyncTransaction.m */,
+				662A3ACE1C2AC363007AD700 /* _ASAsyncTransactionConfig.h */,
+				662A3ACF1C2AC363007AD700 /* _ASAsyncTransactionGroup.h */,
+				662A3AD01C2AC363007AD700 /* _ASAsyncTransactionGroup.m */,
+			);
+			path = ASTransaction;
+			sourceTree = "<group>";
+		};
+		662A3AD41C2AC38E007AD700 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Private;
 			sourceTree = "<group>";
 		};
 		66DEECA31C1AAF7000CE6D7E = {
@@ -352,12 +368,12 @@
 				66DEECB41C1AAF7000CE6D7E /* AppDelegate.m in Sources */,
 				661012221C23E435000C4F93 /* _ASDisplayLayer.m in Sources */,
 				6610122D1C23E648000C4F93 /* O2OTableViewCell.m in Sources */,
+				662A3AD31C2AC363007AD700 /* _ASAsyncTransactionGroup.m in Sources */,
 				66E5F4051C29434400FAC2B1 /* ASSentinel.m in Sources */,
 				66DEECB11C1AAF7000CE6D7E /* main.m in Sources */,
-				661012201C23E435000C4F93 /* _ASAsyncDispalyOperation.m in Sources */,
-				667676831C27F0EA00DB4F01 /* _ASAsyncTransaction.m in Sources */,
+				662A3AD21C2AC363007AD700 /* _ASAsyncTransaction.m in Sources */,
+				662A3AD11C2AC363007AD700 /* _ASAsyncDispalyOperation.m in Sources */,
 				661012131C23E401000C4F93 /* O2OTableView.m in Sources */,
-				661012211C23E435000C4F93 /* _ASAsyncTransactionGroup.m in Sources */,
 				661012241C23E435000C4F93 /* ASLabelNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

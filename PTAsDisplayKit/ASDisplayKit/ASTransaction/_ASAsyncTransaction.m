@@ -157,6 +157,7 @@ static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
         for (_ASAsyncDispalyOperation * operation in _operations) {
             [operation callAndReleaseCompletionBlock:isCanceled];
         }
+        [_operations removeAllObjects];
         _state = ASAsyncTransationStateComplete;
         
         if (_completionBlcok) {

@@ -41,62 +41,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PTAsDisplayKit/ASDisplayKit/_ASDisplayLayer.m"
-            timestampString = "472535078.456429"
+            filePath = "PTAsDisplayKit/ASDisplayKit/_ASAsyncDispalyOperation.m"
+            timestampString = "472544745.995903"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
-            landmarkName = "-setNeedsDisplay"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "-dealloc"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PTAsDisplayKit/ASDisplayKit/_ASDisplayLayer.m"
-            timestampString = "472535078.456429"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "-layoutSublayers"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[_ASDisplayLayer layoutSublayers]"
-                  moduleName = "PTAsDisplayKit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sunhanpt/Documents/projectes/PTAsDisplayKit/PTAsDisplayKit/ASDisplayKit/_ASDisplayLayer.m"
-                  timestampString = "472531517.102855"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "78"
-                  endingLineNumber = "78"
-                  offsetFromSymbolStart = "17">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[_ASDisplayLayer layoutSublayers]"
-                  moduleName = "PTAsDisplayKit"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sunhanpt/Documents/projectes/PTAsDisplayKit/PTAsDisplayKit/ASDisplayKit/_ASDisplayLayer.m"
-                  timestampString = "472531517.103132"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "78"
-                  endingLineNumber = "78"
-                  offsetFromSymbolStart = "54">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

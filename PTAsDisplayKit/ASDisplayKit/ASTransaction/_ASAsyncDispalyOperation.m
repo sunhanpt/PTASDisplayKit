@@ -8,23 +8,17 @@
 
 #import <pthread.h>
 #import <mach/mach.h>
+#import <Foundation/NSAutoreleasePool.h>
 #import "ASAssert.h"
 #import "_ASAsyncDispalyOperation.h"
 
 #if DEBUG
 static inline void currentThreadInfo(NSString* str)
 {
-    if (str){
-        NSLog(@"---------%@----------",str);
-    }
-    
+
     NSThread* thread = [NSThread currentThread];
     mach_port_t machTID = pthread_mach_thread_np(pthread_self());
-    NSLog(@"current thread num: %x thread name:%@", machTID,thread.name);
-    
-    if (str){
-        NSLog(@"-------------------");
-    }
+    NSLog(@"%@-->current thread num: %x thread name:%@",str, machTID,thread.name);
 }
 
 
@@ -82,7 +76,7 @@ static inline void dumpThreads(NSString* str) {
 {
     ASDisplayNodeAssertNil(_displayCompletionBlock, @"Should have been called and released before -dealloc");
 #if DEBUG
-    dumpThreads(@"dealloc");
+    currentThreadInfo(@"dealloc");
 #endif
 }
 
@@ -94,14 +88,16 @@ static inline void dumpThreads(NSString* str) {
 - (void)main
 {
     // isCancelled可以通过cancel函数调用，也可以在取消transaction的时候调用
-    if (self.isCancelled){
-        return;
-    }
+    @autoreleasepool {
+        if (self.isCancelled){
+            return;
+        }
 #if DEBUG
-    currentThreadInfo(@"start");
+        currentThreadInfo(@"start");
 #endif
-    if (_displayBlock){
-        self.value = _displayBlock();
+        if (_displayBlock){
+            self.value = _displayBlock();
+        }
     }
 }
 

@@ -36,3 +36,20 @@
 @end
 
 #endif /* ASDisplayNode_h */
+/**
+ *  node与layer的数据transform，存储数据加上锁，保证线程安全
+ */
+@interface ASDisplayNode(UIViewBridge)
+
+/**
+ *  设置需要layout
+ */
+- (void)setNeedsLayout;
+
+@property (atomic, strong) id contents; // 展示内容：layer中的展示内容，默认nil
+@property (atomic, assign) BOOL clipsToBounds; // 裁剪到边界，默认NO
+@property (atomic, getter=isOpaque)  BOOL opaque; // 不透明，默认YES
+@property (atomic, getter=isHidden) BOOL hidden; // 是否隐藏
+//@property ();
+
+@end

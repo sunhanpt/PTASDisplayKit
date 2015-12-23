@@ -26,6 +26,11 @@
  *  是否异步渲染
  */
 @property (atomic, assign) BOOL displaysAsynchronously;
+/**
+ *  当前事务：包含operations
+ */
+@property (nonatomic, strong) _ASAsyncTransaction * asTransaction;
+
 @end
 
 

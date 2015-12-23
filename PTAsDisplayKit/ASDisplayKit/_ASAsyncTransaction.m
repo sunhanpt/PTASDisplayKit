@@ -93,7 +93,7 @@ static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
 - (void)addOperationWithBlock:(async_operation_display_block_t)block completion:(async_operation_completion_block_t)completion
 {
     ASDisplayNodeAssertMainThread();
-    ASDisplayNodeAssert(_state == ASAsyncTransationStateOpen || _state == ASAsyncTransationStateComplete, @"You can only add operations to open transactions");
+    ASDisplayNodeAssert(_state == ASAsyncTransationStateOpen, @"You can only add operations to open transactions");
     [self _ensureTransactionData];
     // 添加dispatch_group为了线程同步。
     async_operation_display_block_t displayBlock = (id)^{
@@ -108,7 +108,6 @@ static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
     [_operations addObject:operation];
     dispatch_group_enter(_group);
     [[_ASTransactionDispalyQueue sharedInstance] addOperation:operation];
-    [[_ASAsyncTransactionGroup mainTransactionGroup] addTransaction:self];
 }
 
 - (void)addOperation:(_ASAsyncDispalyOperation *)operation
@@ -133,7 +132,7 @@ static long __ASDisplayLayerMaxConcurrentDisplayCount = 8;
 - (void)commit
 {
     ASDisplayNodeAssertMainThread();
-    ASDisplayNodeAssert(_state == ASAsyncTransationStateOpen || _state == ASAsyncTransationStateComplete, @"You cannot double-commit a transaction");
+    ASDisplayNodeAssert(_state == ASAsyncTransationStateOpen, @"You cannot double-commit a transaction");
     _state = ASAsyncTransationStateCommitted;
     if ([_operations count] == 0){
         // transaction已开，但是operation为空，直接同步运行completionBlock

@@ -8,6 +8,7 @@
 
 #import "ASAssert.h"
 
+#import "_ASDisplayLayer.h"
 #import "_ASAsyncTransaction.h"
 #import "_ASAsyncTransactionGroup.h"
 
@@ -19,7 +20,7 @@ static void _transactionGroupRunLoopObserverCallback(CFRunLoopObserverRef observ
 @end
 
 @implementation _ASAsyncTransactionGroup {
-    NSHashTable *_displayTransactions;
+    NSHashTable *_displayLayers;
 }
 
 + (_ASAsyncTransactionGroup *)mainTransactionGroup
@@ -64,27 +65,29 @@ static void _transactionGroupRunLoopObserverCallback(CFRunLoopObserverRef observ
 - (id)init
 {
     if ((self = [super init])) {
-        _displayTransactions = [NSHashTable hashTableWithOptions:NSPointerFunctionsObjectPointerPersonality];
+        _displayLayers = [NSHashTable hashTableWithOptions:NSPointerFunctionsObjectPointerPersonality];
     }
     return self;
 }
 
-- (void)addTransaction:(_ASAsyncTransaction *)transaction
+- (void)addDisplayLayer:(_ASDisplayLayer *)layer
 {
     ASDisplayNodeAssertMainThread();
-    ASDisplayNodeAssert(transaction != nil, @"No transaction");
-    [_displayTransactions addObject:transaction];
+    ASDisplayNodeAssert(layer != nil, @"No layer");
+    [_displayLayers addObject:layer];
 }
 
 - (void)commit
 {
     ASDisplayNodeAssertMainThread();
     
-    if ([_displayTransactions count]) {
-        NSHashTable *displayTransactionsToCommit = [_displayTransactions copy];
-        [_displayTransactions removeAllObjects];
+    if ([_displayLayers count]) {
+        NSHashTable *displayLayersToCommit = [_displayLayers copy];
+        [_displayLayers removeAllObjects];
         
-        for (_ASAsyncTransaction * transaction in displayTransactionsToCommit) {
+        for (_ASDisplayLayer * layer in displayLayersToCommit) {
+            _ASAsyncTransaction * transaction = layer.asTransaction;
+            layer.asTransaction = nil;
             [transaction commit];
         }
     }

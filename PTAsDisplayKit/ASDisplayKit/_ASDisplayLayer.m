@@ -16,10 +16,17 @@
 @interface _ASDisplayLayer()
 
 /**
- *  事务：包含operations
+ *  序列标记：用于取消多余绘制（保证在一个runloop中，仅仅绘制一遍layer）；
  */
-@property (nonatomic, strong) _ASAsyncTransaction * asTransaction;
 @property (nonatomic, strong) ASSentinel * displaySentinel;
+/**
+ *  当前的transaction
+ */
+@property (nonatomic, strong) _ASAsyncTransaction * currentASTransaction;
+/**
+ *  transaction 集合
+ */
+@property (nonatomic, strong) NSHashTable * asTransactionsHashTable;
 
 @end
 
@@ -40,12 +47,29 @@
 #pragma mark - getter and setter
 - (_ASAsyncTransaction *)asTransaction
 {
-    if (!_asTransaction){
-        _asTransaction = [[_ASAsyncTransaction alloc] initWithCallbackQueue:NULL completionBlock:^(_ASAsyncTransaction * asTransaction, BOOL canceled) {
-            [asTransaction releaseAllOperations];
+    _ASAsyncTransaction * transaction = self.currentASTransaction;
+    if (nil == transaction){
+        NSHashTable * transactions = self.asTransactionsHashTable;
+        if (nil == transaction){
+            transactions = [NSHashTable hashTableWithOptions:NSPointerFunctionsObjectPointerPersonality];
+            self.asTransactionsHashTable = transactions;
+        }
+        transaction = [[_ASAsyncTransaction alloc] initWithCallbackQueue:dispatch_get_main_queue() completionBlock:^(_ASAsyncTransaction *asTransaction, BOOL canceled) {
+            if (canceled){
+                return;
+            }
+            [transactions removeObject:asTransaction];
         }];
+        [transactions addObject:transaction];
+        self.currentASTransaction = transaction;
     }
-    return _asTransaction;
+    [[_ASAsyncTransactionGroup mainTransactionGroup] addDisplayLayer:self];
+    return transaction;
+}
+
+- (void)setAsTransaction:(_ASAsyncTransaction *)asTransaction
+{
+    self.currentASTransaction = asTransaction;
 }
 
 #pragma mark - override method

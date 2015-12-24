@@ -7,6 +7,7 @@
 //
 #import "ASThread.h"
 #import "ASDisplayNode.h"
+#import "ASDisplayNodeInternal.h"
 
 #define DISPLAYNODE_USE_LOCKS 1
 
@@ -45,6 +46,7 @@
 {
     //_bridge_prologue;
     //return _getFromLayer(contents);
+    //ASDN::MutexLocker l(_propertyLock);
     return nil;
 }
 

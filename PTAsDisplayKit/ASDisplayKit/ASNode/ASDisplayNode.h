@@ -11,10 +11,9 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "ASThread.h"
 #import "_ASDisplayLayer.h"
 
-@interface ASDisplayNode : NSObject<_ASDisplayLayerDelegate>
+@interface ASDisplayNode : NSObject
 /**
  *  node的名称
  */

@@ -7,10 +7,7 @@
 //
 
 #import "ASDisplayNode.h"
-
-@interface ASDisplayNode()
-
-@end
+#import "ASDisplayNodeInternal.h"
 
 @implementation ASDisplayNode
 
@@ -39,7 +36,6 @@
 {
     _layer = [[_ASDisplayLayer alloc] init];
     _layer.asyncDelegate = self;
-    
 }
 
 #pragma mark - _ASDisplayLayerDelegate

@@ -67,6 +67,8 @@
 		66845DB01C2BEF0D0062EECA /* ASSentinel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASSentinel.h; sourceTree = "<group>"; };
 		66845DB11C2BEF0D0062EECA /* ASSentinel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASSentinel.m; sourceTree = "<group>"; };
 		66845DB21C2BEF0D0062EECA /* ASThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASThread.h; sourceTree = "<group>"; };
+		66845DB81C2C13DF0062EECA /* ASDisplayNodeInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDisplayNodeInternal.h; sourceTree = "<group>"; };
+		66845DB91C2C16150062EECA /* _AS-objc-internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "_AS-objc-internal.h"; sourceTree = "<group>"; };
 		66DEECAC1C1AAF7000CE6D7E /* PTAsDisplayKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PTAsDisplayKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66DEECB01C1AAF7000CE6D7E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		66DEECB21C1AAF7000CE6D7E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				662A3AD51C2ACD8E007AD700 /* ASDisplayNode+UIViewBridge.mm */,
+				66845DB81C2C13DF0062EECA /* ASDisplayNodeInternal.h */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 				66845DB01C2BEF0D0062EECA /* ASSentinel.h */,
 				66845DB11C2BEF0D0062EECA /* ASSentinel.m */,
 				66845DB21C2BEF0D0062EECA /* ASThread.h */,
+				66845DB91C2C16150062EECA /* _AS-objc-internal.h */,
 			);
 			path = Base;
 			sourceTree = "<group>";

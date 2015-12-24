@@ -11,6 +11,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "ASThread.h"
 #import "_ASDisplayLayer.h"
 
 @interface ASDisplayNode : NSObject<_ASDisplayLayerDelegate>
@@ -50,6 +51,13 @@
 @property (atomic, assign) BOOL clipsToBounds; // 裁剪到边界，默认NO
 @property (atomic, getter=isOpaque)  BOOL opaque; // 不透明，默认YES
 @property (atomic, getter=isHidden) BOOL hidden; // 是否隐藏
-//@property ();
+@property (atomic, assign) CGFloat alpha; // alpha通道值,默认值1.0
+@property (atomic, assign) CGRect bounds; // bounds 默认为CGrectZero
+@property (atomic, assign) CGRect frame; // frame 默认为CGrectZero
 
 @end
+
+// 改造宏定义
+#define ASDisplayNodeAssertThreadAffinity(viewNode)   ASDisplayNodeAssert(!viewNode || ASDisplayNodeThreadIsMain(), @"Incorrect display node thread affinity - this method should not be called off the main thread after the ASDisplayNode's view or layer have been created")
+#define ASDisplayNodeCAssertThreadAffinity(viewNode) ASDisplayNodeCAssert(!viewNode || ASDisplayNodeThreadIsMain(), @"Incorrect display node thread affinity - this method should not be called off the main thread after the ASDisplayNode's view or layer have been created")
+

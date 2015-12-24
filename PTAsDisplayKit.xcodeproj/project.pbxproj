@@ -8,13 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		661012131C23E401000C4F93 /* O2OTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 661012121C23E401000C4F93 /* O2OTableView.m */; };
-		661012221C23E435000C4F93 /* _ASDisplayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6610121B1C23E435000C4F93 /* _ASDisplayLayer.m */; };
-		661012231C23E435000C4F93 /* ASDisplayNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6610121D1C23E435000C4F93 /* ASDisplayNode.m */; };
-		661012241C23E435000C4F93 /* ASLabelNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6610121F1C23E435000C4F93 /* ASLabelNode.m */; };
 		6610122D1C23E648000C4F93 /* O2OTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6610122C1C23E648000C4F93 /* O2OTableViewCell.m */; };
 		662A3AD11C2AC363007AD700 /* _ASAsyncDispalyOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A3ACB1C2AC363007AD700 /* _ASAsyncDispalyOperation.m */; };
 		662A3AD21C2AC363007AD700 /* _ASAsyncTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A3ACD1C2AC363007AD700 /* _ASAsyncTransaction.m */; };
 		662A3AD31C2AC363007AD700 /* _ASAsyncTransactionGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A3AD01C2AC363007AD700 /* _ASAsyncTransactionGroup.m */; };
+		662A3AD61C2ACD8E007AD700 /* ASDisplayNode+UIViewBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 662A3AD51C2ACD8E007AD700 /* ASDisplayNode+UIViewBridge.mm */; };
+		66845DB31C2BEF0D0062EECA /* _ASDisplayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 66845DA71C2BEF0D0062EECA /* _ASDisplayLayer.m */; };
+		66845DB41C2BEF0D0062EECA /* ASDisplayNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 66845DA91C2BEF0D0062EECA /* ASDisplayNode.m */; };
+		66845DB51C2BEF0D0062EECA /* ASLabelNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 66845DAB1C2BEF0D0062EECA /* ASLabelNode.m */; };
+		66845DB61C2BEF0D0062EECA /* ASSentinel.m in Sources */ = {isa = PBXBuildFile; fileRef = 66845DB11C2BEF0D0062EECA /* ASSentinel.m */; };
 		66DEECB11C1AAF7000CE6D7E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DEECB01C1AAF7000CE6D7E /* main.m */; };
 		66DEECB41C1AAF7000CE6D7E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DEECB31C1AAF7000CE6D7E /* AppDelegate.m */; };
 		66DEECB71C1AAF7000CE6D7E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DEECB61C1AAF7000CE6D7E /* ViewController.m */; };
@@ -22,7 +24,6 @@
 		66DEECBF1C1AAF7000CE6D7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66DEECBD1C1AAF7000CE6D7E /* LaunchScreen.storyboard */; };
 		66DEECCA1C1AAF7000CE6D7E /* PTAsDisplayKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DEECC91C1AAF7000CE6D7E /* PTAsDisplayKitTests.m */; };
 		66DEECD51C1AAF7000CE6D7E /* PTAsDisplayKitUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DEECD41C1AAF7000CE6D7E /* PTAsDisplayKitUITests.m */; };
-		66E5F4051C29434400FAC2B1 /* ASSentinel.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E5F4041C29434400FAC2B1 /* ASSentinel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,15 +46,8 @@
 /* Begin PBXFileReference section */
 		661012111C23E3F1000C4F93 /* O2OTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = O2OTableView.h; sourceTree = "<group>"; };
 		661012121C23E401000C4F93 /* O2OTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = O2OTableView.m; sourceTree = "<group>"; };
-		6610121A1C23E435000C4F93 /* _ASDisplayLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ASDisplayLayer.h; sourceTree = "<group>"; };
-		6610121B1C23E435000C4F93 /* _ASDisplayLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ASDisplayLayer.m; sourceTree = "<group>"; };
-		6610121C1C23E435000C4F93 /* ASDisplayNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDisplayNode.h; sourceTree = "<group>"; };
-		6610121D1C23E435000C4F93 /* ASDisplayNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDisplayNode.m; sourceTree = "<group>"; };
-		6610121E1C23E435000C4F93 /* ASLabelNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASLabelNode.h; sourceTree = "<group>"; };
-		6610121F1C23E435000C4F93 /* ASLabelNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASLabelNode.m; sourceTree = "<group>"; };
 		6610122B1C23E63E000C4F93 /* O2OTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = O2OTableViewCell.h; sourceTree = "<group>"; };
 		6610122C1C23E648000C4F93 /* O2OTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = O2OTableViewCell.m; sourceTree = "<group>"; };
-		661105441C1EE57A006AA729 /* ASAssert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASAssert.h; sourceTree = "<group>"; };
 		662A3ACA1C2AC363007AD700 /* _ASAsyncDispalyOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ASAsyncDispalyOperation.h; sourceTree = "<group>"; };
 		662A3ACB1C2AC363007AD700 /* _ASAsyncDispalyOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ASAsyncDispalyOperation.m; sourceTree = "<group>"; };
 		662A3ACC1C2AC363007AD700 /* _ASAsyncTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ASAsyncTransaction.h; sourceTree = "<group>"; };
@@ -61,6 +55,18 @@
 		662A3ACE1C2AC363007AD700 /* _ASAsyncTransactionConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ASAsyncTransactionConfig.h; sourceTree = "<group>"; };
 		662A3ACF1C2AC363007AD700 /* _ASAsyncTransactionGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ASAsyncTransactionGroup.h; sourceTree = "<group>"; };
 		662A3AD01C2AC363007AD700 /* _ASAsyncTransactionGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ASAsyncTransactionGroup.m; sourceTree = "<group>"; };
+		662A3AD51C2ACD8E007AD700 /* ASDisplayNode+UIViewBridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "ASDisplayNode+UIViewBridge.mm"; sourceTree = "<group>"; };
+		66845DA61C2BEF0D0062EECA /* _ASDisplayLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ASDisplayLayer.h; sourceTree = "<group>"; };
+		66845DA71C2BEF0D0062EECA /* _ASDisplayLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ASDisplayLayer.m; sourceTree = "<group>"; };
+		66845DA81C2BEF0D0062EECA /* ASDisplayNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDisplayNode.h; sourceTree = "<group>"; };
+		66845DA91C2BEF0D0062EECA /* ASDisplayNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDisplayNode.m; sourceTree = "<group>"; };
+		66845DAA1C2BEF0D0062EECA /* ASLabelNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASLabelNode.h; sourceTree = "<group>"; };
+		66845DAB1C2BEF0D0062EECA /* ASLabelNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASLabelNode.m; sourceTree = "<group>"; };
+		66845DAE1C2BEF0D0062EECA /* ASAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASAssert.h; sourceTree = "<group>"; };
+		66845DAF1C2BEF0D0062EECA /* ASBaseDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASBaseDefines.h; sourceTree = "<group>"; };
+		66845DB01C2BEF0D0062EECA /* ASSentinel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASSentinel.h; sourceTree = "<group>"; };
+		66845DB11C2BEF0D0062EECA /* ASSentinel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASSentinel.m; sourceTree = "<group>"; };
+		66845DB21C2BEF0D0062EECA /* ASThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASThread.h; sourceTree = "<group>"; };
 		66DEECAC1C1AAF7000CE6D7E /* PTAsDisplayKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PTAsDisplayKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66DEECB01C1AAF7000CE6D7E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		66DEECB21C1AAF7000CE6D7E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -76,8 +82,6 @@
 		66DEECD01C1AAF7000CE6D7E /* PTAsDisplayKitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PTAsDisplayKitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66DEECD41C1AAF7000CE6D7E /* PTAsDisplayKitUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PTAsDisplayKitUITests.m; sourceTree = "<group>"; };
 		66DEECD61C1AAF7000CE6D7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		66E5F4031C29431D00FAC2B1 /* ASSentinel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASSentinel.h; sourceTree = "<group>"; };
-		66E5F4041C29434400FAC2B1 /* ASSentinel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASSentinel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,34 +123,12 @@
 		661012141C23E435000C4F93 /* ASDisplayKit */ = {
 			isa = PBXGroup;
 			children = (
+				66845DA51C2BEF0D0062EECA /* ASNode */,
+				66845DAC1C2BEF0D0062EECA /* Supporting Files */,
 				662A3AD41C2AC38E007AD700 /* Private */,
 				662A3AC91C2AC363007AD700 /* ASTransaction */,
-				6610121A1C23E435000C4F93 /* _ASDisplayLayer.h */,
-				6610121B1C23E435000C4F93 /* _ASDisplayLayer.m */,
-				6610121C1C23E435000C4F93 /* ASDisplayNode.h */,
-				6610121D1C23E435000C4F93 /* ASDisplayNode.m */,
-				6610121E1C23E435000C4F93 /* ASLabelNode.h */,
-				6610121F1C23E435000C4F93 /* ASLabelNode.m */,
 			);
 			path = ASDisplayKit;
-			sourceTree = "<group>";
-		};
-		661105421C1EE565006AA729 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				661105431C1EE565006AA729 /* Base */,
-			);
-			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		661105431C1EE565006AA729 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				661105441C1EE57A006AA729 /* ASAssert.h */,
-				66E5F4031C29431D00FAC2B1 /* ASSentinel.h */,
-				66E5F4041C29434400FAC2B1 /* ASSentinel.m */,
-			);
-			path = Base;
 			sourceTree = "<group>";
 		};
 		662A3AC91C2AC363007AD700 /* ASTransaction */ = {
@@ -166,8 +148,42 @@
 		662A3AD41C2AC38E007AD700 /* Private */ = {
 			isa = PBXGroup;
 			children = (
+				662A3AD51C2ACD8E007AD700 /* ASDisplayNode+UIViewBridge.mm */,
 			);
 			path = Private;
+			sourceTree = "<group>";
+		};
+		66845DA51C2BEF0D0062EECA /* ASNode */ = {
+			isa = PBXGroup;
+			children = (
+				66845DA61C2BEF0D0062EECA /* _ASDisplayLayer.h */,
+				66845DA71C2BEF0D0062EECA /* _ASDisplayLayer.m */,
+				66845DA81C2BEF0D0062EECA /* ASDisplayNode.h */,
+				66845DA91C2BEF0D0062EECA /* ASDisplayNode.m */,
+				66845DAA1C2BEF0D0062EECA /* ASLabelNode.h */,
+				66845DAB1C2BEF0D0062EECA /* ASLabelNode.m */,
+			);
+			path = ASNode;
+			sourceTree = "<group>";
+		};
+		66845DAC1C2BEF0D0062EECA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				66845DAD1C2BEF0D0062EECA /* Base */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		66845DAD1C2BEF0D0062EECA /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				66845DAE1C2BEF0D0062EECA /* ASAssert.h */,
+				66845DAF1C2BEF0D0062EECA /* ASBaseDefines.h */,
+				66845DB01C2BEF0D0062EECA /* ASSentinel.h */,
+				66845DB11C2BEF0D0062EECA /* ASSentinel.m */,
+				66845DB21C2BEF0D0062EECA /* ASThread.h */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		66DEECA31C1AAF7000CE6D7E = {
@@ -195,7 +211,6 @@
 			isa = PBXGroup;
 			children = (
 				661012141C23E435000C4F93 /* ASDisplayKit */,
-				661105421C1EE565006AA729 /* Supporting Files */,
 				66DEECB21C1AAF7000CE6D7E /* AppDelegate.h */,
 				66DEECB31C1AAF7000CE6D7E /* AppDelegate.m */,
 				66DEECB51C1AAF7000CE6D7E /* ViewController.h */,
@@ -363,18 +378,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				661012231C23E435000C4F93 /* ASDisplayNode.m in Sources */,
+				662A3AD61C2ACD8E007AD700 /* ASDisplayNode+UIViewBridge.mm in Sources */,
 				66DEECB71C1AAF7000CE6D7E /* ViewController.m in Sources */,
 				66DEECB41C1AAF7000CE6D7E /* AppDelegate.m in Sources */,
-				661012221C23E435000C4F93 /* _ASDisplayLayer.m in Sources */,
+				66845DB41C2BEF0D0062EECA /* ASDisplayNode.m in Sources */,
 				6610122D1C23E648000C4F93 /* O2OTableViewCell.m in Sources */,
+				66845DB31C2BEF0D0062EECA /* _ASDisplayLayer.m in Sources */,
+				66845DB61C2BEF0D0062EECA /* ASSentinel.m in Sources */,
 				662A3AD31C2AC363007AD700 /* _ASAsyncTransactionGroup.m in Sources */,
-				66E5F4051C29434400FAC2B1 /* ASSentinel.m in Sources */,
 				66DEECB11C1AAF7000CE6D7E /* main.m in Sources */,
 				662A3AD21C2AC363007AD700 /* _ASAsyncTransaction.m in Sources */,
 				662A3AD11C2AC363007AD700 /* _ASAsyncDispalyOperation.m in Sources */,
+				66845DB51C2BEF0D0062EECA /* ASLabelNode.m in Sources */,
 				661012131C23E401000C4F93 /* O2OTableView.m in Sources */,
-				661012241C23E435000C4F93 /* ASLabelNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

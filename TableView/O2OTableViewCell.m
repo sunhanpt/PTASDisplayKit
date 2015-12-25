@@ -31,7 +31,7 @@ static int indexLine = 0;
 
 - (void)layoutSubviews
 {
-    [_labelNode setFrame:CGRectMake(100, 0, self.contentView.frame.size.width - 100 - (indexLine++) * 1, self.contentView.frame.size.height)];
+    [_labelNode setFrame:CGRectMake(100, 0, self.contentView.frame.size.width - 100 - (indexLine ++) *0.2, self.contentView.frame.size.height)];
     [_labelNode setBackgroundColor:[UIColor colorWithRed:0 green:0.65 blue:0.65 alpha:1.0]];
     [_labelNode setText:self.name];
     [_labelNode setTextFont:[UIFont systemFontOfSize:16]];

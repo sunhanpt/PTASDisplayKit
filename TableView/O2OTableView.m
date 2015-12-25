@@ -53,6 +53,7 @@
     if (!tableViewCell){
         tableViewCell = [[O2OTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([O2OTableViewCell class])];
     }
+    tableViewCell.name = [NSString stringWithFormat:@"test--%li",(long)indexPath.row];
     return tableViewCell;
 }
 

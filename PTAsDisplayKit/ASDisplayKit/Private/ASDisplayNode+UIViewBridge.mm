@@ -95,13 +95,46 @@
 - (CGRect)frame
 {
     _bridge_prologue;
-    return _getFromLayer(frame);
+    CGPoint position = self.position;
+    CGRect bounds = self.bounds;
+    CGPoint anchorPoint = self.anchorPoint;
+    CGPoint origin = CGPointMake(position.x - bounds.size.width * anchorPoint.x,
+                                 position.y - bounds.size.height * anchorPoint.y);
+    return CGRectMake(origin.x, origin.y, bounds.size.width, bounds.size.height);
 }
 
 - (void)setFrame:(CGRect)newFrame
 {
     _bridge_prologue;
-    _setToLayer(frame, newFrame);
+    if (1){ // 设置到layer
+        [self __setSafeFrame:newFrame];
+    }
+    else{ // 设置到view
+        
+    }
+}
+
+- (void)__setSafeFrame:(CGRect)rect
+{
+    ASDisplayNodeAssertThreadAffinity(self);
+    ASDN::MutexLocker l(_propertyLock);
+    
+    BOOL useLayer = (_layer && ASDisplayNodeThreadIsMain());
+    
+    CGPoint origin      = (useLayer ? _layer.bounds.origin : self.bounds.origin);
+    CGPoint anchorPoint = (useLayer ? _layer.anchorPoint   : self.anchorPoint);
+    
+    CGRect  bounds      = (CGRect){ origin, rect.size };
+    CGPoint position    = CGPointMake(rect.origin.x + rect.size.width * anchorPoint.x,
+                                      rect.origin.y + rect.size.height * anchorPoint.y);
+    
+    if (useLayer) {
+        _layer.bounds = bounds;
+        _layer.position = position;
+    } else {
+        self.bounds = bounds;
+        self.position = position;
+    }
 }
 
 - (UIColor *)backgroundColor
@@ -113,6 +146,17 @@
 {
     _bridge_prologue;
     _setToLayer(backgroundColor, newBackgroundColor.CGColor);
+}
+
+- (CGRect)bounds
+{
+    _bridge_prologue;
+    return _getFromLayer(bounds);
+}
+- (void)setBounds:(CGRect)newBounds
+{
+    _bridge_prologue;
+    _setToLayer(bounds, newBounds);
 }
 
 @end

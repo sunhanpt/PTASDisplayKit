@@ -32,6 +32,23 @@
     return CGSizeMake(200, 200);
 }
 
+#pragma mark setter and getter
+- (void)setLayerBacked:(BOOL)isLayerBacked
+{
+    ASDN::MutexLocker l(_propertyLock);
+    ASDisplayNodeAssert(!_view && !_layer, @"Cannot change isLayerBacked after layer or view has loaded");
+    
+    if (isLayerBacked != _flags.layerBacked && !_view && !_layer) {
+        _flags.layerBacked = isLayerBacked;
+    }
+}
+
+- (BOOL)isLayerBacked
+{
+    ASDN::MutexLocker l(_propertyLock);
+    return _flags.layerBacked;
+}
+
 #pragma mark - private
 - (void)_initializeInstance
 {

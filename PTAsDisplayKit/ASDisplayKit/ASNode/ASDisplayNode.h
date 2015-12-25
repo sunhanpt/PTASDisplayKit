@@ -12,6 +12,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "_ASDisplayLayer.h"
+#import "_ASDisplayView.h"
 
 @interface ASDisplayNode : NSObject
 /**
@@ -22,6 +23,14 @@
  *  包含的layer
  */
 @property (nonatomic, readonly, strong) _ASDisplayLayer * layer;
+/**
+ *  包含的view
+ */
+@property (nonatomic, readonly, strong) _ASDisplayView * view;
+/**
+ *  标记node是否是直接依赖于layer而非view
+ */
+@property (nonatomic, assign, getter=isLayerBacked) BOOL layerBacked;
 /**
  *  node的尺寸
  */
@@ -53,6 +62,9 @@
 @property (atomic, assign) CGRect bounds; // bounds 默认为CGrectZero
 @property (atomic, assign) CGRect frame; // frame 默认为CGrectZero
 @property (atomic, strong) UIColor * backgroundColor; // 背景色
+@property (atomic, assign) CGPoint anchorPoint;  //锚点 default={0.5, 0.5}
+@property (atomic, assign) CGFloat zPosition;    //深度值，相当于光栅中使用的z-buffer值
+@property (atomic, assign) CGPoint position; // layer在父层中的位置。父层的左上角为原点
 
 @end
 

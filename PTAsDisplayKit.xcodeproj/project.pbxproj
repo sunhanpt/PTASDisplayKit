@@ -14,7 +14,7 @@
 		662A3AD31C2AC363007AD700 /* _ASAsyncTransactionGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A3AD01C2AC363007AD700 /* _ASAsyncTransactionGroup.m */; };
 		662A3AD61C2ACD8E007AD700 /* ASDisplayNode+UIViewBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 662A3AD51C2ACD8E007AD700 /* ASDisplayNode+UIViewBridge.mm */; };
 		66845DB31C2BEF0D0062EECA /* _ASDisplayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 66845DA71C2BEF0D0062EECA /* _ASDisplayLayer.m */; };
-		66845DB41C2BEF0D0062EECA /* ASDisplayNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 66845DA91C2BEF0D0062EECA /* ASDisplayNode.m */; };
+		66845DB41C2BEF0D0062EECA /* ASDisplayNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 66845DA91C2BEF0D0062EECA /* ASDisplayNode.mm */; };
 		66845DB51C2BEF0D0062EECA /* ASLabelNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 66845DAB1C2BEF0D0062EECA /* ASLabelNode.m */; };
 		66845DB61C2BEF0D0062EECA /* ASSentinel.m in Sources */ = {isa = PBXBuildFile; fileRef = 66845DB11C2BEF0D0062EECA /* ASSentinel.m */; };
 		66DEECB11C1AAF7000CE6D7E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DEECB01C1AAF7000CE6D7E /* main.m */; };
@@ -59,7 +59,7 @@
 		66845DA61C2BEF0D0062EECA /* _ASDisplayLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ASDisplayLayer.h; sourceTree = "<group>"; };
 		66845DA71C2BEF0D0062EECA /* _ASDisplayLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ASDisplayLayer.m; sourceTree = "<group>"; };
 		66845DA81C2BEF0D0062EECA /* ASDisplayNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDisplayNode.h; sourceTree = "<group>"; };
-		66845DA91C2BEF0D0062EECA /* ASDisplayNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDisplayNode.m; sourceTree = "<group>"; };
+		66845DA91C2BEF0D0062EECA /* ASDisplayNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ASDisplayNode.mm; sourceTree = "<group>"; };
 		66845DAA1C2BEF0D0062EECA /* ASLabelNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASLabelNode.h; sourceTree = "<group>"; };
 		66845DAB1C2BEF0D0062EECA /* ASLabelNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASLabelNode.m; sourceTree = "<group>"; };
 		66845DAE1C2BEF0D0062EECA /* ASAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASAssert.h; sourceTree = "<group>"; };
@@ -68,7 +68,6 @@
 		66845DB11C2BEF0D0062EECA /* ASSentinel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASSentinel.m; sourceTree = "<group>"; };
 		66845DB21C2BEF0D0062EECA /* ASThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASThread.h; sourceTree = "<group>"; };
 		66845DB81C2C13DF0062EECA /* ASDisplayNodeInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDisplayNodeInternal.h; sourceTree = "<group>"; };
-		66845DB91C2C16150062EECA /* _AS-objc-internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "_AS-objc-internal.h"; sourceTree = "<group>"; };
 		66DEECAC1C1AAF7000CE6D7E /* PTAsDisplayKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PTAsDisplayKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66DEECB01C1AAF7000CE6D7E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		66DEECB21C1AAF7000CE6D7E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -162,7 +161,7 @@
 				66845DA61C2BEF0D0062EECA /* _ASDisplayLayer.h */,
 				66845DA71C2BEF0D0062EECA /* _ASDisplayLayer.m */,
 				66845DA81C2BEF0D0062EECA /* ASDisplayNode.h */,
-				66845DA91C2BEF0D0062EECA /* ASDisplayNode.m */,
+				66845DA91C2BEF0D0062EECA /* ASDisplayNode.mm */,
 				66845DAA1C2BEF0D0062EECA /* ASLabelNode.h */,
 				66845DAB1C2BEF0D0062EECA /* ASLabelNode.m */,
 			);
@@ -185,7 +184,6 @@
 				66845DB01C2BEF0D0062EECA /* ASSentinel.h */,
 				66845DB11C2BEF0D0062EECA /* ASSentinel.m */,
 				66845DB21C2BEF0D0062EECA /* ASThread.h */,
-				66845DB91C2C16150062EECA /* _AS-objc-internal.h */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -385,7 +383,7 @@
 				662A3AD61C2ACD8E007AD700 /* ASDisplayNode+UIViewBridge.mm in Sources */,
 				66DEECB71C1AAF7000CE6D7E /* ViewController.m in Sources */,
 				66DEECB41C1AAF7000CE6D7E /* AppDelegate.m in Sources */,
-				66845DB41C2BEF0D0062EECA /* ASDisplayNode.m in Sources */,
+				66845DB41C2BEF0D0062EECA /* ASDisplayNode.mm in Sources */,
 				6610122D1C23E648000C4F93 /* O2OTableViewCell.m in Sources */,
 				66845DB31C2BEF0D0062EECA /* _ASDisplayLayer.m in Sources */,
 				66845DB61C2BEF0D0062EECA /* ASSentinel.m in Sources */,

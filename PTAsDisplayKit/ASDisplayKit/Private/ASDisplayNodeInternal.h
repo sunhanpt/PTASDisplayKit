@@ -9,17 +9,15 @@
 #ifndef ASDisplayNodeInternal_h
 #define ASDisplayNodeInternal_h
 
-#import "_AS-objc-internal.h"
 #import "ASThread.h"
 #import "ASDisplayNode.h"
 
 @interface ASDisplayNode()<_ASDisplayLayerDelegate>
 {
 @protected
-    //ASDN::RecursiveMutex _propertyLock;
+    ASDN::RecursiveMutex _propertyLock;
     
-    //ASDisplayNode * __weak _supernode;
-    //ASDN::RecursiveMutex _propertyLock;
+    _ASDisplayLayer * _layer;
 }
 
 @end

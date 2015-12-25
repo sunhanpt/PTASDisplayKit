@@ -41,18 +41,18 @@
  */
 @interface ASDisplayNode(UIViewBridge)
 
-/**
- *  设置需要layout
- */
-- (void)setNeedsLayout;
+///**
+// *  设置需要layout
+// */
+//- (void)setNeedsLayout;
 
 @property (atomic, strong) id contents; // 展示内容：layer中的展示内容，默认nil
-@property (atomic, assign) BOOL clipsToBounds; // 裁剪到边界，默认NO
 @property (atomic, getter=isOpaque)  BOOL opaque; // 不透明，默认YES
 @property (atomic, getter=isHidden) BOOL hidden; // 是否隐藏
 @property (atomic, assign) CGFloat alpha; // alpha通道值,默认值1.0
-@property (atomic, assign) CGRect bounds; // bounds 默认为CGrectZero
+//@property (atomic, assign) CGRect bounds; // bounds 默认为CGrectZero
 @property (atomic, assign) CGRect frame; // frame 默认为CGrectZero
+@property (atomic, strong) UIColor * backgroundColor; // 背景色
 
 @end
 

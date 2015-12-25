@@ -18,6 +18,12 @@
     ASDN::RecursiveMutex _propertyLock;
     
     _ASDisplayLayer * _layer;
+    
+    struct ASDisplayNodeFlags {
+        // whether custom drawing is enabled
+        unsigned implementsDrawRect:1;
+        unsigned implementsImageDisplay:1;
+    } _flags;
 }
 
 @end

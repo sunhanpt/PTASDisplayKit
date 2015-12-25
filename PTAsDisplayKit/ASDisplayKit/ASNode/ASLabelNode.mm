@@ -7,6 +7,7 @@
 //
 
 #import "ASLabelNode.h"
+#import "ASDisplayNodeInternal.h"
 
 // test parameters
 @interface ASLabelNodeDrawParameters : NSObject
@@ -28,6 +29,7 @@
  *
  *  @return 返回属性值
  */
+
 - (NSObject *)drawParametersForAsyncLayer:(_ASDisplayLayer *)layer
 {
     
@@ -52,6 +54,7 @@
     
     return result;
 }
+
 
 @end
 

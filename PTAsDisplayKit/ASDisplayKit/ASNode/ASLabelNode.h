@@ -13,6 +13,10 @@
 
 @interface ASLabelNode : ASDisplayNode
 
+@property (atomic, strong) NSString * text;
+@property (atomic, strong) UIFont * textFont;
+@property (atomic, strong) UIColor * textColor;
+
 @end
 
 

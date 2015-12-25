@@ -11,17 +11,36 @@
 
 // test parameters
 @interface ASLabelNodeDrawParameters : NSObject
-@property (nonatomic, assign, readonly) CGPoint labelOrigin;
-@property (nonatomic, assign, readonly) CGColorRef backgroundColor;
 @property (nonatomic, assign, readonly) CGRect bounds;
-@property (nonatomic, assign, readonly) CGRect frame;
+@property (nonatomic, strong, readonly) UIColor * backgroundColor;
 @property (nonatomic, strong, readonly) NSString * text;
-@property (nonatomic, assign, readonly) CGColorRef textColor;
+@property (nonatomic, strong, readonly) UIColor * textColor;
 @property (nonatomic, strong, readonly) UIFont * textFont;
+
+@end
+
+@implementation ASLabelNodeDrawParameters
+
+- (instancetype)initWithBounds:(CGRect)bounds backgroundColor:(UIColor *)backgroundColor text:(NSString *)text textColor:(UIColor *)textColor textFont:(UIFont *)textFont
+{
+    self = [super init];
+    if (self){
+        _bounds = bounds;
+        _backgroundColor = backgroundColor;
+        _text = text;
+        _textColor = textColor;
+        _textFont = textFont;
+    }
+    return self;
+}
+
 @end
 
 @implementation ASLabelNode
 
+#pragma mark setter and getter
+
+#pragma mark implement _ASDisplayLayerDelegate
 /**
  *  获取绘制参数
  *
@@ -32,29 +51,32 @@
 
 - (NSObject *)drawParametersForAsyncLayer:(_ASDisplayLayer *)layer
 {
-    
-    return nil;
+    ASLabelNodeDrawParameters * parameters = [[ASLabelNodeDrawParameters alloc] initWithBounds:self.bounds backgroundColor:self.backgroundColor text:self.text textColor:self.textColor textFont:self.textFont];
+    return parameters;
 }
 
-+ (UIImage *)displayWithParameters:(id<NSObject>)parameters isCancelled:(async_operation_iscancelled_block_t)isCancelledBlock
++ (void)drawRect:(CGRect)bounds withParameters:(ASLabelNodeDrawParameters *)parameters isCancelled:(async_operation_iscancelled_block_t)isCancelledBlock isRasterizing:(BOOL)isRasterizing
 {
-    UILabel * label = [[UILabel alloc] init];
-    [label setFrame: CGRectMake(0, 0, 100, 50)];
-    label.backgroundColor = [UIColor redColor];
-    label.text = @"test";
-    label.font = [UIFont systemFontOfSize:16];
-    label.textColor = [UIColor colorWithRed:0.2 green:0.7 blue:0.5 alpha:1.0];
+    if (isCancelledBlock()){
+        return;
+    }
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    ASDisplayNodeAssert(context, @"This is no good without a context.");
+    CGContextSaveGState(context);
     
-    UIGraphicsBeginImageContextWithOptions(label.frame.size, YES, 1.0);
+    CGColorRef backgroundColor = parameters.backgroundColor.CGColor;
+    CGContextSetFillColorWithColor(context, backgroundColor);
+    CGContextSetBlendMode(context, kCGBlendModeCopy);
+    CGContextFillRect(context, CGRectInset(bounds, -2, -2));
+    CGContextSetBlendMode(context, kCGBlendModeNormal);
     
-    [[label layer] renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    NSDictionary * attributes = [NSDictionary dictionaryWithObjectsAndKeys:parameters.textFont, NSFontAttributeName, parameters.textColor, NSForegroundColorAttributeName, nil];
     
-    UIGraphicsEndImageContext();
+    [parameters.text drawInRect:parameters.bounds withAttributes:attributes];
     
-    return result;
+    CGContextRestoreGState(context);
 }
-
 
 @end
+
 

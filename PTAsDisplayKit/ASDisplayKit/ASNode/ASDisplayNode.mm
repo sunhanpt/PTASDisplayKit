@@ -99,7 +99,7 @@
 }
 
 #pragma mark - static methods
-// 标记是否实现子函数，避免重复判定，增加运行效率
+// 使用flags标记是否实现函数，避免重复判定，增加运行效率
 static struct ASDisplayNodeFlags GetASDisplayNodeFlags(Class c, ASDisplayNode *instance)
 {
     ASDisplayNodeCAssertNotNil(c, @"class is required");
@@ -107,7 +107,6 @@ static struct ASDisplayNodeFlags GetASDisplayNodeFlags(Class c, ASDisplayNode *i
     struct ASDisplayNodeFlags flags = {0};
     
     flags.implementsDrawRect = ([c respondsToSelector:@selector(drawRect:withParameters:isCancelled:isRasterizing:)] ? 1 : 0);
-    //flags.implementsImageDisplay = ([c respondsToSelector:@selector(displayWithParameters:isCancelled:)] ? 1 : 0);
     flags.implementsImageDisplay = ([c respondsToSelector:@selector(displayWithParameters:isCancelled:)] ? 1 : 0);
     return flags;
 }
